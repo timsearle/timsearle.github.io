@@ -1,6 +1,7 @@
+---
 layout: page
-title: "Altilium Privacy Policy"
 permalink: /altilium-privacy-policy/
+---
 
 # Altilium Privacy Policy
 
