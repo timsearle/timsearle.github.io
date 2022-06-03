@@ -94,6 +94,6 @@ This view simply enables or disables a chevron icon in the toolbar based on how 
 
  ```
 
-![SwiftUI Demo Video](/assets/swiftui-keyboard-demo.mp4){: height="300" }
+![SwiftUI Demo Video](/assets/swiftui-keyboard-demo.mp4){: height="500" }
 
 And that's all there is to it! Let me know your thoughts on [Twitter](https://twitter.com/timsearle_)
