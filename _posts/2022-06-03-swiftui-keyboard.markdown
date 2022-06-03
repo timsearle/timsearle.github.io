@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Navigating Text Fields in SwiftUI"
-date:   2022-06-03 10:52:00
+date:   2022-06-03 00:00:00
 categories: apple
 ---
 
