@@ -85,11 +85,15 @@ This view simply enables or disables a chevron icon in the toolbar based on how 
  	}
  	.toolbar {
 		ToolbarItemGroup(placement: .keyboard) {
-            TextFieldNavigationView<MyCustomInputField>(focusedField: $field, 
-            											allFields: MyCustomInputField.allCases)
+            TextFieldNavigationView<MyCustomInputField>(
+            	focusedField: $field, 
+				allFields: MyCustomInputField.allCases
+			)
 		}
  }
 
  ```
 
-And that's all there is to it!
+![SwiftUI Demo Video](/assets/swiftui-keyboard-demo.mp4)
+
+And that's all there is to it! Let me know your thoughts on [Twitter](https://twitter.com/timsearle_)
