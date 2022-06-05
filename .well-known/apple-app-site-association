@@ -1,0 +1,19 @@
+{
+    "applinks":
+    {
+        "apps":
+        [],
+        "details":
+        [
+            {
+                "appID": "AFZ4443Y2P.dev.searle.batterykit",
+                "components":
+                [
+                    {
+                        "/": "/altilium/"
+                    },
+                ]
+            }
+        ]
+    }
+}
