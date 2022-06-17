@@ -2,7 +2,7 @@
 layout: post
 title:  "Navigating Text Fields in SwiftUI"
 date:   2022-06-03 00:00:00
-categories: apple
+categories: ios swiftui
 ---
 
 As part of my recent development efforts on [Altilium](https://apps.apple.com/gb/app/altilium/id1560227798), I wanted to remove my dependency on using the [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect) library to access the underlying `UITextField` that back the SwiftUI `TextField`. The reason I was using the library was because, at the time (iOS 14), there was no first-party support in SwiftUI for either adding a `Toolbar` to the keyboard or customising the focus state of the `TextField` in the form.
