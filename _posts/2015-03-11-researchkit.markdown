@@ -1,5 +1,6 @@
 ---
 layout: post
+author: Tim Searle
 title:  "ResearchKit"
 date:   2015-03-11 22:39:58
 categories: 

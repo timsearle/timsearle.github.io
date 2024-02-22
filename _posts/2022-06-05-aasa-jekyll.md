@@ -1,5 +1,6 @@
 ---
 layout: post
+author: Tim Searle
 title:  "Adding support for Apple App Site Association files to Jekyll"
 date:   2022-06-05 00:00:00
 categories: 

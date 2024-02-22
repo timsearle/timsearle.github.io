@@ -1,5 +1,6 @@
 ---
 layout: post
+author: Tim Searle
 title:  "iMessage Apps and Stickers"
 date:   2016-10-03 21:24:00
 categories: 

@@ -1,5 +1,6 @@
 ---
 layout: post
+author: Tim Searle
 title:  "Peer-to-Peer Networking on Mobile"
 date:   2015-04-04 21:21:00
 categories: 
