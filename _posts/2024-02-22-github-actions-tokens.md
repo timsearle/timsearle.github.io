@@ -9,12 +9,12 @@ tags:
   - github-actions
 ---
 
-Generally, GitHub Actions is incredibly simple when interacting with private repositories, either through the GITHUB_TOKEN or through creation a Personal Access Token. However, when the tools that your GitHub Action interacts with require to authenticate, injecting that personal access token can become challenging.
+Generally, [GitHub Actions](https://docs.github.com/en/actions) is incredibly simple when interacting with private repositories, either through the `GITHUB_TOKEN` or through creation a Personal Access Token. However, when the tools that your GitHub Action interacts with require to authenticate, injecting that personal access token can become challenging.
 
 Here I show two easy ways to enable your GitHub Actions to interact with private repositories for:
 
-- Bundler
-- Swift Package Manager
+- [Bundler](https://bundler.io)
+- [Swift Package Manager](https://www.swift.org/documentation/package-manager/)
 
 In both of these examples, it's incredibly important to use GitHub Action's secrets to store the personal access token, and then inject that token into the environment of the job that requires it. This ensures it is redacted in any runner logs and not visible in plain text.
 
