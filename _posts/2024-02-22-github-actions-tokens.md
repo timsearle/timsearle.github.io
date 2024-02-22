@@ -27,7 +27,7 @@ Specify the variable `BUNDLE_GITHUB__COM: x-access-token:${{ secrets.$SOME_PAT }
 ```ruby
 gem 'private-dependency', git: 'https://github.com/your-org/private-repo'
 ```
-
+{% raw %}
 ```yml
 name: "Deploy"  
   
@@ -49,6 +49,7 @@ jobs:
       run: |  
         bundle install
 ```
+{% endraw %}
 
 ## Cloning Private Repositories through Swift Package Manager
 
@@ -56,14 +57,16 @@ When Xcode clones dependencies through Swift Package Manager, because it is usin
 
 Use the following `step` in your GitHub Action to modify the git config remote URL:
 
+{% raw %}
 ```yml
 - name: "Setup Authenticated URL"
   shell: bash
   env:
-    GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}|
+    GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}
   run: |
     git config --global --add url."https://oauth2:${GIT_AUTH_TOKEN}@github.com/".insteadOf "https://github.com/"
     git config --global user.name "$GIT_AUTHOR_NAME"  
     git config --global user.email "$GIT_AUTHOR_EMAIL"  
     git config --global credential.username "$GIT_USERNAME"
 ```
+{% endraw %}
