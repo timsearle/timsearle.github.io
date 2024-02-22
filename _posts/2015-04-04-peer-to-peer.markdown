@@ -2,7 +2,8 @@
 layout: post
 title:  "Peer-to-Peer Networking on Mobile"
 date:   2015-04-04 21:21:00
-categories: apple
+categories: 
+  - apple
 ---
 
 [Peer-to-Peer](http://en.wikipedia.org/wiki/Peer-to-peer) (P2P) networking has become increasingly ubiquitous in today's panoply of technology buzzwords. From the classic BitTorrent protocol, to modern cryptocurrencies such as Bitcoin; we are beginning to see a resurgence in the popularity of P2P technologies and I believe that this is being fuelled by a need to communicate and exchange information at a faster rate and perhaps more naturally using our mobile devices.

@@ -2,7 +2,8 @@
 layout: post
 title:  "iMessage Apps and Stickers"
 date:   2016-10-03 21:24:00
-categories: apple
+categories: 
+  - apple
 ---
 
 With the release of iOS 10, [iMessage Apps](https://developer.apple.com/imessage/) are here - the prospect of iMessage apps is innovative, interesting and powerful and they are being undervalued.

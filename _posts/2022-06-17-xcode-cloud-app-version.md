@@ -2,7 +2,9 @@
 layout: post
 title:  "Automatic app version increments with Xcode Cloud using custom build scripts"
 date:   2022-06-17 00:00:00
-tags: ios xcode
+tags: 
+  - ios 
+  - xcode
 ---
 
 ### Using Swift to write custom build scripts in Xcode Cloud

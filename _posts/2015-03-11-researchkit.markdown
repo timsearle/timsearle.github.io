@@ -2,7 +2,8 @@
 layout: post
 title:  "ResearchKit"
 date:   2015-03-11 22:39:58
-categories: apple
+categories: 
+  - apple
 ---
 
 [ResearchKit](https://www.apple.com/researchkit/) is Apple's latest philanthropic contribution to the technology world. 
