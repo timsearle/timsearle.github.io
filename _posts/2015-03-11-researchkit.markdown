@@ -5,8 +5,6 @@ date:   2015-03-11 22:39:58
 categories: apple
 ---
 
-# ResearchKit
-
 [ResearchKit](https://www.apple.com/researchkit/) is Apple's latest philanthropic contribution to the technology world. 
 
 The simple premise is that hundreds of millions of people have a powerful computer in their pocket that has the untapped ability of rapidly increasing the reach and efficacy of medical studies in ways currently not possible.

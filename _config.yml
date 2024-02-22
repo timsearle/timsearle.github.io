@@ -10,6 +10,7 @@ github_username:  timsearle
 theme: minima
 plugins:
   - jekyll-feed
+show_excerpts: true
 
 include: 
   - .well-known
