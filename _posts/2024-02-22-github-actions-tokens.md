@@ -62,8 +62,8 @@ Use the following `step` in your GitHub Action to modify the git config remote U
   env:
     GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}|
   run: |
-  	git config --global --add url."https://oauth2:${GIT_AUTH_TOKEN}@github.com/".insteadOf "https://github.com/"
-  	git config --global user.name "$GIT_AUTHOR_NAME"  
+    git config --global --add url."https://oauth2:${GIT_AUTH_TOKEN}@github.com/".insteadOf "https://github.com/"
+    git config --global user.name "$GIT_AUTHOR_NAME"  
     git config --global user.email "$GIT_AUTHOR_EMAIL"  
     git config --global credential.username "$GIT_USERNAME"
 ```
