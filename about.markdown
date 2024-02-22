@@ -4,12 +4,8 @@ title: About
 permalink: /about/
 ---
 
-# Tim Searle
-
 ![Location](https://img.shields.io/badge/📍%20location-London-brightgreen)
 [![Twitter](https://img.shields.io/badge/twitter-@timsearle_-blue.svg?style=flat)](https://twitter.com/timsearle_)
-
-### About
 
 Hello 👋 My name is Tim, I've been developing for Apple platforms since 2011! 
 
