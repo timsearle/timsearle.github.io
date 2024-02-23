@@ -10,7 +10,7 @@ tags:
   - "ios"
 ---
 
-It's pretty common for an iOS app these days to support universal links, iCloud credentials, App Clips and other functionality related to the [Associated domains](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains) entitlement. The tricky part can sometimes be that you _don't_ have a website or hosting to host the required `apple-app-site-association` file for the Apple CDN to pull.
+It's pretty common for an iOS app these days to support universal links, iCloud credentials, App Clips and other functionality related to the [Associated Domains](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains) entitlement. The tricky part can sometimes be that you _don't_ have a website or hosting to host the required `apple-app-site-association` file for the Apple CDN to pull.
 
 This blog is actually running on a static site generator called Jekyll, and it's hosted by GitHub Pages. There's an excellent [guide](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) from GitHub if you'd like to do something similar - I'm also using it to satisfy the App Store privacy policy requirement too.
 

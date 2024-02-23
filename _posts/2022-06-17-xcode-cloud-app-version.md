@@ -171,7 +171,7 @@ try appVersionBumpIfNeeded()
 
 ```
 
-As mentioned earlier - there's definitely an opportunity at the callsite (`try appVersionBumpIfNeeded()`) to inspect the `CI_WORKFLOW` name and decide what sequence of functions you wish to call as part of your `ci_post_clone` script, e.g.
+As mentioned earlier - there's definitely an opportunity at the call-site (`try appVersionBumpIfNeeded()`) to inspect the `CI_WORKFLOW` name and decide what sequence of functions you wish to call as part of your `ci_post_clone` script, e.g.
 
 ```swift
 enum Workflow: String {

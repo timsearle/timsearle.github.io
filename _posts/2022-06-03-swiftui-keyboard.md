@@ -17,7 +17,7 @@ I'm not going to regurgitate Paul Hudson's excellent articles - so for more deta
 * [Toolbar Support](https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-a-toolbar-to-the-keyboard)
 * [Focus State Handling](https://www.hackingwithswift.com/quick-start/swiftui/how-to-dismiss-the-keyboard-for-a-textfield)
 
-This article is to quickly demonstrate a generalised solution I've come up with to adding quick keyboard toolbar based navigation to a form - a must-have for any app that utilisies the `.numberPad` or `.decimalPad` keyboard styles.
+This article is to quickly demonstrate a generalised solution I've come up with to adding quick keyboard toolbar based navigation to a form - a must-have for any app that utilises the `.numberPad` or `.decimalPad` keyboard styles.
 
 I've built a simple type conforming to `View`, that takes the current `FocusState` from your parent view (where your `TextField`'s live) and the array of all the available field types you have on that particular view:
 
