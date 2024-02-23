@@ -22,7 +22,9 @@ In both of these examples, it's incredibly important to use GitHub Action's secr
 
 There's an obscure variable that Bundler uses to authenticate with GitHub, `BUNDLE_GITHUB__COM`:
 
+{% raw %}
 Specify the variable `BUNDLE_GITHUB__COM: x-access-token:${{ secrets.$SOME_PAT }}` in your `job`’s env` key and ensure the URL to clone the ruby gem is using https.
+{% endraw %}
 
 ```ruby
 gem 'private-dependency', git: 'https://github.com/your-org/private-repo'
