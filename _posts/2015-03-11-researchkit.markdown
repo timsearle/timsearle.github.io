@@ -1,10 +1,11 @@
 ---
 layout: post
-author: Tim Searle
+lang: en
+author: "Tim Searle"
 title:  "ResearchKit"
-date:   2015-03-11 22:39:58
+date:   "2015-03-11 22:39:58"
 categories: 
-  - apple
+  - "apple"
 ---
 
 [ResearchKit](https://www.apple.com/researchkit/) is Apple's latest philanthropic contribution to the technology world. 

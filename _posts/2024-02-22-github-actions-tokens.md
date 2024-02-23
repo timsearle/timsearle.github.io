@@ -1,12 +1,13 @@
 ---
 layout: post
-author: Tim Searle
+lang: en
+author: "Tim Searle"
 title:  "Accessing private GitHub repositories within GitHub Actions"
-date:   2024-02-22 00:00:00
+date:   "2024-02-22 00:00:00"
 tags: 
-  - ios 
-  - ruby
-  - github-actions
+  - "ios" 
+  - "ruby"
+  - "github-actions"
 ---
 
 Generally, [GitHub Actions](https://docs.github.com/en/actions) is incredibly simple when interacting with private repositories, either through the `GITHUB_TOKEN` or through creation a Personal Access Token. However, when the tools that your GitHub Action interacts with require to authenticate, injecting that personal access token can become challenging.

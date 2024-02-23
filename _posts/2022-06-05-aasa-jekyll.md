@@ -1,12 +1,13 @@
 ---
 layout: post
-author: Tim Searle
+lang: en
+author: "Tim Searle"
 title:  "Adding support for Apple App Site Association files to Jekyll"
-date:   2022-06-05 00:00:00
+date:   "2022-06-05 00:00:00"
 categories: 
-  - apple
+  - "apple"
 tags:
-  - ios
+  - "ios"
 ---
 
 It's pretty common for an iOS app these days to support universal links, iCloud credentials, App Clips and other functionality related to the [Associated domains](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains) entitlement. The tricky part can sometimes be that you _don't_ have a website or hosting to host the required `apple-app-site-association` file for the Apple CDN to pull.
