@@ -1,5 +1,6 @@
 ---
 layout: page
+title: "Altilium"
 permalink: /altilium/
 ---
 

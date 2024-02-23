@@ -1,16 +1,28 @@
-title: Tim Searle
+title: "Tim Searle"
 description: >-
   A personal preamble into the state of the technology industry, project statuses and obscure learnings from my journey as a software engineer.
 baseurl: ""
 url: "https://www.searle.dev"
+
+# Social
 twitter_username: timsearle_
 github_username:  timsearle
+linkedin_username: timsearleuk
+instagram_username: climbingtim
 
-# Build settings
 theme: minima
 plugins:
   - jekyll-feed
 show_excerpts: true
+
+header_pages:
+  - about.md
+
+lang: en
+locale: en_GB
+
+minima:
+  date_format: "%b %-d, %Y"
 
 include: 
   - .well-known
@@ -19,3 +31,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+
+liquid:
+  error_mode: strict
+  strict_variables: true
+  strict_filters: true
