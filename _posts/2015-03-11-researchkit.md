@@ -18,7 +18,7 @@ It will have full integration with Apple's health tool, HealthKit. HealthKit is 
 
 Medical studies will be able to have full access to a consenting user's HealthKit data and mine numerous amounts of useful health related metrics; pedometer data, calorific intake and heart rates. Perhaps this increased integration with HealthKit will encourage more apps to use the service - which will greatly enrich the data it stores and the experience for its users.
 
-ResearchKit already has five applications supporting research studies that cover a broad range of conditions. Unfortunately the apps are currently restricted to limited  [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewFeature?id=973253773&mt=8&ls=1) locations, but users from the USA can opt-in to these studies *today* and begin contributing their own metrics and start performing a range of specialist in-app tests. The diseases and conditions being covered currently are:
+ResearchKit already has five applications supporting research studies that cover a broad range of conditions. Unfortunately the apps are currently restricted to limited  [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewFeature?id=973253773&mt=8&ls=1) locations, but users from the USA can opt in to these studies *today* and begin contributing their own metrics and start performing a range of specialist in-app tests. The diseases and conditions being covered currently are:
 
 * Asthma
 * Parkinson's Disease
@@ -40,7 +40,7 @@ Based around the concept of customisable 'Modules', the developer can work with 
 
 * **Active Tasks** - Beyond the collection of "passive" data from the device's HealthKit and co-motion processor sources, developer's can utilise Active Tasks to retrieve data from the device's sensors. Categorised under four headings: *motor activities, fitness, cognition, voice*.
 
-These modules are completely customisable and developers will also be able create their own. Due to the open-source nature of the framework I am envisioning collaboration between medical authorities, researchers and developers to enhance and augment the existing modules into a much larger and broad *platform* as time passes.
+These modules are completely customisable and developers will also be able to create their own. Due to the open-source nature of the framework I am envisioning collaboration between medical authorities, researchers and developers to enhance and augment the existing modules into a much larger and broad *platform* as time passes.
 
 Neither Apple, nor ResearchKit itself provides any sort of mechanism to transmit data between the app itself and the backend - the onus is on the developer to implement this mechanism. This clearly reaffirms what Apple mentioned during the *Spring Forward* and their stance on data privacy that Apple will never see the user's data.
 
