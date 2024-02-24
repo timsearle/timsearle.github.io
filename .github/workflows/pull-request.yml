@@ -19,6 +19,10 @@ jobs:
       with:
         bundler-cache: true
 
+    - name: "Add Jekyll Front Matter"
+      shell: bash
+      run: ./scripts/front-matter-injection.sh
+
     - name: "Build Site with Jekyll"
       run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
       env:
