@@ -1,5 +1,5 @@
 ---
 layout: home
-title: "Latest Articles"
+title: "Articles"
 list_title: " "
 ---
