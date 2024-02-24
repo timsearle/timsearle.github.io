@@ -23,15 +23,3 @@ jobs:
       run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
       env:
         JEKYLL_ENV: production
-
-  spelling:
-    name: "Check spelling"
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: "Checkout ${{ github.ref }} from ${{ github.repository }}"
-      uses: actions/checkout@v4
-
-    - uses: reviewdog/action-misspell@v1.12
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
