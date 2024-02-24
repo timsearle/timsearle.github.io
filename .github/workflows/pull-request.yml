@@ -32,7 +32,8 @@ jobs:
     - name: "Checkout ${{ github.ref }} from ${{ github.repository }}"
       uses: actions/checkout@v4
 
-    - uses: reviewdog/action-misspell@v1.15
+    - name: "Spell check with reviewdog"
+      uses: reviewdog/action-misspell@v1.15
       with:
         locale: "UK"
         pattern: |
