@@ -32,6 +32,9 @@ jobs:
     - name: "Checkout ${{ github.ref }} from ${{ github.repository }}"
       uses: actions/checkout@v4
 
-    - uses: reviewdog/action-misspell@v1.12
+    - uses: reviewdog/action-misspell@v1.15
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        locale: "UK"
+        pattern: |
+          *.md
+        fail_on_error: true
