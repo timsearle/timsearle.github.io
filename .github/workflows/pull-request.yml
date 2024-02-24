@@ -36,6 +36,7 @@ jobs:
       uses: reviewdog/action-misspell@v1.15
       with:
         locale: "UK"
+        reporter: "github-pr-review"
         pattern: |
           *.md
         fail_on_error: true
