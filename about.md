@@ -7,7 +7,7 @@ permalink: /about/
 ![Location](https://img.shields.io/badge/📍%20location-London-brightgreen)
 [![Twitter](https://img.shields.io/badge/twitter-@timsearle_-blue.svg?style=flat)](https://twitter.com/timsearle_)
 
-Hello 👋 My name is Tim, I've been developing for Apple plotforms sisdasdnce 2011! 
+Hello 👋 My name is Tim, I've been developing for Apple platforms since 2011! 
 
 I'm incredibly passionate about building applications that put the user experience first - details matter! Interested in securing mobile applications, user data and respecting user privacy.
 
