@@ -19,10 +19,6 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: "Add Jekyll Front Matter"
-      shell: bash
-      run: ./scripts/build.sh
-
     - name: "Build Site with Jekyll"
       run: ./scripts/build.sh
       env:
