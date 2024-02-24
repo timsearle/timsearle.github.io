@@ -35,7 +35,7 @@ jobs:
 
     - name: "Build Site with Jekyll"
       shell: bash
-      run: ./scripts/front-matter-injection.sh
+      run: ./scripts/build.sh
       env:
         JEKYLL_ENV: production
         BASE_URL: ${{ steps.pages.outputs.base_path }}
