@@ -33,19 +33,11 @@ jobs:
       id: pages
       uses: actions/configure-pages@v4
 
-    - name: "Retrieve about.md"
-      shell: bash
-      run: |
-        curl -s -o about.md https://raw.githubusercontent.com/timsearle/timsearle/main/README.md
-
-    - name: "Add Jekyll Front Matter"
-      shell: bash
-      run: ./scripts/front-matter-injection.sh
 
     - name: "Build Site with Jekyll"
-      run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
       env:
         JEKYLL_ENV: production
+        BASE_URL: ${{ steps.pages.outputs.base_path }}
 
     - name: "Upload GitHub Pages Artifact"
       uses: actions/upload-pages-artifact@v3
