@@ -52,7 +52,8 @@ jobs:
     timeout-minutes: 3
     permissions:
       contents: read
-      pages: write
+      pages: write # actions/deploy-pages@v4
+      id-token: write # actions/deploy-pages
     needs: build
 
     environment:
