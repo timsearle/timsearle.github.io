@@ -1,0 +1,30 @@
+name: "Pull Request"
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workfows/**
+      - .github/**.yml
+
+jobs:
+  gh-int:
+    name: "GH-Lint"
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read # actions/checkout
+      security-events: write # codeql-action/upload-sarif
+    steps:
+      - name: "Checkout ${{ github.ref }} in ${{ github.repository }}"
+        uses: actions/checkout@v4
+
+      - name: "Run validation"
+        id: ghlint
+        uses: TWiStErRob/net.twisterrob.ghlint@v0
+
+      - name: "Publish 'GH-Lint' GitHub Code Scanning analysis"
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ steps.ghlint.outputs.sarif-report }}
