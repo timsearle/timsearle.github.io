@@ -2,28 +2,44 @@ name: "GH-Lint"
 
 on:
   pull_request:
-    branches:
-      - main
     paths:
-      - .github/workflows/**
+      - ".github/workflows/**"
+      - ".github/actions/**"
 
 jobs:
-  gh-lint:
-    name: "GH-Lint"
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
+  ghlint:
+    name: "Validate GitHub Workflows"
+
     permissions:
-      contents: read # actions/checkout
-      security-events: write # codeql-action/upload-sarif
+      # actions/checkout
+      contents: read
+      # github/codeql-action/upload-sarif
+      security-events: write
+      # github/codeql-action/upload-sarif in private repositories / internal organizations.
+      actions: read
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
-      - name: "Checkout ${{ github.ref }} in ${{ github.repository }}"
+
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v4
 
-      - name: "Run validation"
+      - name: "Run GH-Lint validation."
         id: ghlint
         uses: TWiStErRob/net.twisterrob.ghlint@v0.5.0
 
-      - name: "Publish 'GH-Lint' GitHub Code Scanning analysis"
+      - name: "Upload 'GH-Lint Results' artifact."
+        if: ${{ success() || failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'GH-Lint Results'
+          if-no-files-found: error
+          path: ${{ steps.ghlint.outputs.sarif-report }}
+
+      - name: "Publish 'GH-Lint' GitHub Code Scanning analysis."
+        if: ${{ success() || failure() }}
         uses: github/codeql-action/upload-sarif@v3
         with:
+          checkout_path: ${{ github.workspace }}
           sarif_file: ${{ steps.ghlint.outputs.sarif-report }}
