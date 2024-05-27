@@ -9,6 +9,9 @@ jobs:
   build:
     name: "Verify Build"
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read
 
     steps:
     - name: "Checkout ${{ github.ref }} from ${{ github.repository }}"
@@ -20,6 +23,7 @@ jobs:
         bundler-cache: true
 
     - name: "Build Site with Jekyll"
+      shell: bash
       run: ./scripts/build.sh
       env:
         JEKYLL_ENV: production
