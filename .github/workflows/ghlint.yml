@@ -1,12 +1,11 @@
-name: "Pull Request"
+name: "GH-Lint"
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - .github/workfows/**
-      - .github/**.yml
+      - .github/workflows/**
 
 jobs:
   gh-lint:
