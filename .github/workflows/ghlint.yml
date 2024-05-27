@@ -9,7 +9,7 @@ on:
       - .github/**.yml
 
 jobs:
-  gh-int:
+  gh-lint:
     name: "GH-Lint"
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -22,7 +22,7 @@ jobs:
 
       - name: "Run validation"
         id: ghlint
-        uses: TWiStErRob/net.twisterrob.ghlint@v0
+        uses: TWiStErRob/net.twisterrob.ghlint@v0.5.0
 
       - name: "Publish 'GH-Lint' GitHub Code Scanning analysis"
         uses: github/codeql-action/upload-sarif@v3
