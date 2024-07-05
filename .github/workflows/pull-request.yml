@@ -59,7 +59,8 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: "Build Site with Jekyll"
+    - name: "Build Site"
+      shell: bash
       run: ./scripts/build.sh
       env:
         JEKYLL_ENV: production
