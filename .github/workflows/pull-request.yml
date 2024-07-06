@@ -59,8 +59,12 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: "Build Site with Jekyll"
+    - name: "Build Site"
+      shell: bash
       run: ./scripts/build.sh
       env:
         JEKYLL_ENV: production
         BASE_URL: ${{ steps.pages.outputs.base_path }}
+
+    - name: "Upload GitHub Pages Artifact"
+      uses: actions/upload-pages-artifact@v3
