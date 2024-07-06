@@ -38,6 +38,7 @@ exclude:
   - .idea
   - .github
   - vendor
+  - scripts
 
 liquid:
   error_mode: strict
