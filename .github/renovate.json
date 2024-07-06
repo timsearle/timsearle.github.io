@@ -5,8 +5,8 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["github-actions"],
-      "automerge": true
+      "matchManagers": ["github-actions"],
+      "automerge": true,
     }
   ]
 }
