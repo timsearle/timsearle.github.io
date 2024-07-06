@@ -37,18 +37,18 @@ jobs:
       id: pages
       uses: actions/configure-pages@v5
 
-    - name: "Build Site with Jekyll"
+    - name: "Build Site"
       shell: bash
       run: ./scripts/build.sh
       env:
         JEKYLL_ENV: production
         BASE_URL: ${{ steps.pages.outputs.base_path }}
 
-    - name: "Upload GitHub Pages Artifact"
+    - name: "Upload Artifact"
       uses: actions/upload-pages-artifact@v3
 
   deploy:
-    name: "Deploy Jekyll Site to GitHub Pages"
+    name: "Deploy Site"
     runs-on: ubuntu-latest
     timeout-minutes: 3
     permissions:
@@ -62,11 +62,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-    - name: "Deploy to GitHub Pages"
+    - name: "Deploy"
       id: deployment
       uses: actions/deploy-pages@v4
 
-    - name: "Set annotation github url"
+    - name: "Print Site URL"
       shell: bash
       env:
         SITE_URL: ${{ steps.deployment.outputs.page_url }}
