@@ -6,6 +6,37 @@ on:
       - main
 
 jobs:
+
+  renovate:
+    name: "Validate Renovate Configuration"
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      # actions/checkout
+      contents: read
+
+    steps:
+      - name: "Cache NPX"
+        uses: actions/cache@v4
+        with:
+          key: npx-${{ github.workflow }}-${{ github.job }}
+          path: |
+            ~/.npm/_npx
+
+      - name: "Checkout ${{ github.ref }} ref in ${{ github.repository }} repository."
+        uses: actions/checkout@v4
+
+      - name: "Run renovate-config-validator on repository configuration."
+        shell: bash
+        run: >
+          npx
+          --yes
+          --package "renovate"
+          --
+          renovate-config-validator
+          --strict
+          .github/renovate.json
+
   ghlint:
     name: "Validate GitHub Workflows"
 
