@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
-      "automerge": true,
+      "automerge": true
     }
   ]
 }
