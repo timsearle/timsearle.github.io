@@ -81,7 +81,7 @@ jobs:
     permissions: {}
     steps:
       - name: "Create Marker"
-        uses: newrelic/deployment-marker-action@v2.6.0
+        uses: newrelic/deployment-marker-action@v2.6.1
         with:
           apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
           guid: "NjU3MDA1MHxCUk9XU0VSfEFQUExJQ0FUSU9OfDUzODcwMTY1Mg"
