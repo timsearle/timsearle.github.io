@@ -39,6 +39,7 @@ exclude:
   - .github
   - vendor
   - scripts
+  - AGENT.md
 
 liquid:
   error_mode: strict
