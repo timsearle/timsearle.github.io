@@ -24,7 +24,7 @@ jobs:
             ~/.npm/_npx
 
       - name: "Checkout ${{ github.ref }} ref in ${{ github.repository }} repository."
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Run renovate-config-validator on repository configuration."
         shell: bash
@@ -53,7 +53,7 @@ jobs:
     steps:
 
       - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Run GH-Lint validation."
         id: ghlint
@@ -83,7 +83,7 @@ jobs:
 
     steps:
     - name: "Checkout ${{ github.ref }} from ${{ github.repository }}"
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: "Setup Ruby"
       uses: ruby/setup-ruby@v1.268.0
