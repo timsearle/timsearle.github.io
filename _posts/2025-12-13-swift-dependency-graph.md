@@ -11,7 +11,7 @@ tags:
   - "tooling"
 ---
 
-I’ve just open sourced a small tool called [`swift-dependency-graph`](https://github.com/timsearle/swift-dependency-graph).
+I’ve just open sourced a small tool called [`swift-dependency-graph`](https://github.com/timsearle/swift-dependency-graph). This was coded completely via [copilot-cli](https://github.com/features/copilot/cli), including publishing this blog post!
 
 Given the root of an iOS app, it builds a dependency graph across Xcode targets and SwiftPM packages, and can export it in a few formats (including an interactive HTML graph).
 
