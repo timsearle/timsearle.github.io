@@ -3,6 +3,7 @@ source "https://rubygems.org"
 # gem "jekyll", "~> 4.3.3"
 
 gem "minima"
+gem "csv"
 
 gem "github-pages", group: :jekyll_plugins
 
