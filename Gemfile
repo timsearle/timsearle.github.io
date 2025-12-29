@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "minima"
 gem "csv"
+gem "bigdecimal"
 
 gem "github-pages", group: :jekyll_plugins
 
