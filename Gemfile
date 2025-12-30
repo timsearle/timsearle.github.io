@@ -1,12 +1,13 @@
 source "https://rubygems.org"
 
-# gem "jekyll", "~> 4.3.3"
+gem "jekyll", "~> 4.3.3"
+gem "liquid", "4.0.4"
 
 gem "minima"
 gem "csv"
 gem "bigdecimal"
-
-gem "github-pages", group: :jekyll_plugins
+gem "logger"
+gem "base64"
 
 group :jekyll_plugins do
   gem "jekyll-feed"
