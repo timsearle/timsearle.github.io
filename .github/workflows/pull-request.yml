@@ -103,7 +103,13 @@ jobs:
         mkdir -p _site/.well-known
         cp -a .well-known/. _site/.well-known/
 
+    - name: "Create Pages Artifact"
+      shell: bash
+      run: tar -cf artifact.tar -C _site .
+
     - name: "Upload Artifact"
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
-        path: _site
+        name: github-pages
+        path: artifact.tar
+        retention-days: 1
