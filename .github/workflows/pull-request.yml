@@ -97,12 +97,6 @@ jobs:
         JEKYLL_ENV: production
         BASE_URL: ${{ steps.pages.outputs.base_path }}
 
-    - name: "Ensure .well-known is present"
-      shell: bash
-      run: |
-        mkdir -p _site/.well-known
-        cp -a .well-known/. _site/.well-known/
-
     - name: "Create Pages Artifact"
       shell: bash
       run: tar -cf artifact.tar -C _site .
