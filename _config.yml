@@ -25,9 +25,6 @@ locale: en_GB
 minima:
   date_format: "%b %-d, %Y"
 
-include: 
-  - .well-known
-
 exclude:
   - Gemfile
   - Gemfile.lock
