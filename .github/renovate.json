@@ -3,13 +3,24 @@
   "extends": [
     "config:recommended"
   ],
+  "schedule": [
+    "before 10pm on saturday"
+  ],
+  "platformAutomerge": true,
   "lockFileMaintenance": {
     "enabled": true,
-    "automerge": true
+    "automerge": true,
+    "schedule": [
+      "after 10pm on saturday"
+    ]
   },
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     }
   ]
