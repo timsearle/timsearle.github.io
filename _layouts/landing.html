@@ -193,6 +193,26 @@
       margin-bottom: 0.5rem;
     }
     
+    /* Links */
+    a {
+      color: #8B4513;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    
+    a:hover {
+      color: #5D2E0C;
+    }
+    
+    .content-section a {
+      color: #8B4513;
+      font-weight: 500;
+    }
+    
+    .content-section a:hover {
+      color: #5D2E0C;
+    }
+    
     /* Footer */
     .landing-footer {
       text-align: center;
@@ -255,8 +275,8 @@
     @media (prefers-color-scheme: dark) {
       :root {
         --text-primary: #F5F5F5;
-        --text-secondary: #AAA;
-        --text-muted: #777;
+        --text-secondary: #B8B8B8;
+        --text-muted: #888;
       }
       
       body {
@@ -265,13 +285,46 @@
       
       .feature-card,
       .content-section {
-        background: rgba(40, 35, 30, 0.9);
+        background: rgba(40, 35, 30, 0.95);
+      }
+      
+      a {
+        color: #FFB46E;
+      }
+      
+      a:hover {
+        color: #FFD4A8;
+      }
+      
+      .content-section a {
+        color: #FFB46E;
+      }
+      
+      .content-section a:hover {
+        color: #FFD4A8;
+      }
+      
+      .landing-footer a {
+        color: #E0E0E0;
+      }
+      
+      .landing-footer a:hover {
+        color: #FFFFFF;
+      }
+      
+      .btn-primary {
+        background: #F5F5F5;
+        color: #1A1A1A;
+      }
+      
+      .btn-primary:hover {
+        background: #FFFFFF;
       }
       
       .btn-secondary {
         background: rgba(60, 55, 50, 0.9);
         color: var(--text-primary);
-        border-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.15);
       }
       
       .btn-secondary:hover {
