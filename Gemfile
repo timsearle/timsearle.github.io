@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.4.0"
-gem "liquid", "4.0.4"
+gem "liquid", "5.11.0"
 
 gem "minima"
 gem "csv"
