@@ -15,8 +15,15 @@ permalink: /govision/privacy/
 
 <section class="content-section">
   <h2>Data Collection</h2>
-  <p><strong>GoVision does not collect, use, store, or transfer any data from your device.</strong></p>
-  <p>All image processing happens entirely on-device using Apple's Core ML framework. Your photos, captured board positions, and SGF files remain on your iPhone and are never uploaded to any server.</p>
+  <p><strong>GoVision does not collect, transmit, or share any personal data.</strong></p>
+  <p>All image processing happens entirely on-device using Apple's Core ML framework. Your photos and captured board positions are processed locally and are never uploaded to any external server.</p>
+</section>
+
+<section class="content-section">
+  <h2>iCloud Storage</h2>
+  <p>GoVision uses <strong>iCloud Documents</strong> to store your game library (SGF files) so they sync across your Apple devices signed into the same iCloud account. This data is stored in your personal iCloud container and is not accessible to us or any third party.</p>
+  <p>You can manage or delete this data through your device's Settings → [Your Name] → iCloud → Manage Storage.</p>
+  <p>If iCloud is unavailable or disabled, your games are stored locally on your device.</p>
 </section>
 
 <section class="content-section">
