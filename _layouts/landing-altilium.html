@@ -13,6 +13,10 @@
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   {% if page.og_image %}<meta property="og:image" content="{{ page.og_image | absolute_url }}">{% endif %}
   
+  <!-- Theme color for Safari status bar -->
+  <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F5F5F5" media="(prefers-color-scheme: light)">
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ '/assets/altilium/app-icon.png' | relative_url }}">
   
