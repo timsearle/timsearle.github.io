@@ -41,14 +41,8 @@ permalink: /altilium/privacy/
 </section>
 
 <section class="content-section">
-  <h2>Contact</h2>
-  <p>For any questions about this privacy policy or the app, please contact:</p>
-  <p><a href="mailto:altilium@searle.dev">altilium@searle.dev</a></p>
-</section>
-
-<section class="content-section">
-  <h2>Support</h2>
-  <p>For any support, feedback, or feature suggestions, please reach out to:</p>
+  <h2>Contact & Support</h2>
+  <p>For any questions about this privacy policy, support, feedback, or feature suggestions, please contact:</p>
   <p><a href="mailto:altilium@searle.dev">altilium@searle.dev</a></p>
 </section>
 
