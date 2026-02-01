@@ -656,6 +656,9 @@ hr {
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.8rem;
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -666,15 +669,9 @@ hr {
   color: var(--color-accent);
 }
 
-.footer-rss {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.footer-rss svg {
-  width: 12px;
-  height: 12px;
+.footer-links svg {
+  width: 14px;
+  height: 14px;
   fill: currentColor;
 }
 
