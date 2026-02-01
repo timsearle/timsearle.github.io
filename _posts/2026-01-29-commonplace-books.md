@@ -9,7 +9,9 @@ tags:
   - "productivity"
 ---
 
-I've always been someone that has been a bit of a perfectionist and over thought my own processes for achieving goals. It's made it hard to ship blog posts regularly, land my side projects and generally complete tasks. For me, one part of creating things involves having a place to dump ideas down quickly that isn't digital - there's something about taking the effort to note things down by hand and create a more mindful moment, allowing me to take a pause and really process what I'm thinking about.
+I've always been someone that has been a bit of a perfectionist and over thought my own processes for achieving goals. It's made it hard to ship blog posts regularly, land my side projects and generally complete tasks. 
+
+For me, one part of creating things involves having a place to dump ideas down quickly that isn't digital - there's something about taking the effort to note things down by hand and create a more mindful moment, allowing me to take a pause and really process what I'm thinking about.
 
 However, I'd buy a brand new notebook and I'd painstakingly fuss over what I was going to use that notebook for, what structure I'd choose to write in it with, and if I made a mistake while writing in it, I'd be incredibly frustrated that now that page/part was "ruined". The very process of just writing notes would suddenly throw up roadblocks in front of just delivering the creative ideas I'd just had.
 
