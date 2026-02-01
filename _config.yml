@@ -10,20 +10,15 @@ github_username:  timsearle
 linkedin_username: timsearleuk
 instagram_username: climbingtim
 
-theme: minima
 plugins:
   - jekyll-feed
 show_excerpts: true
 
 header_pages:
-  - index.md
   - about.md
 
 lang: en
 locale: en_GB
-
-minima:
-  date_format: "%b %-d, %Y"
 
 exclude:
   - Gemfile
@@ -35,7 +30,6 @@ exclude:
   - .idea
   - .github
   - vendor
-  - scripts
   - AGENT.md
 
 liquid:

@@ -1,0 +1,33 @@
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+  <span class="theme-toggle-text">Dark</span>
+</button>
+<script>
+  (function() {
+    const toggle = document.getElementById('theme-toggle');
+    const text = toggle.querySelector('.theme-toggle-text');
+    
+    function updateButton() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      text.textContent = isDark ? 'Light' : 'Dark';
+    }
+    
+    toggle.addEventListener('click', function() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateButton();
+      // Dispatch custom event for mermaid and other components
+      window.dispatchEvent(new CustomEvent('themechange', { 
+        detail: { theme: isDark ? 'light' : 'dark' } 
+      }));
+    });
+    
+    // Initialize button text
+    updateButton();
+  })();
+</script>
