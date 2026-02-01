@@ -10,7 +10,7 @@ I'm Tim, a software engineer based in London. Building software professionally s
 
 **Principal Software Engineer** at Marks & Spencer — leading authentication APIs for Identity and Access Management and building out the Developer Platform with a focus on native mobile engineering.
 
-**Altilium** — an iOS app in SwiftUI that helps cardiac physiologists optimise pacemaker battery outputs.
+**[Altilium](https://altilium.app)** — an iOS app in SwiftUI that helps cardiac physiologists optimise pacemaker battery outputs.
 
 ## Code
 
