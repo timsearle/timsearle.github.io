@@ -30,7 +30,6 @@ exclude:
   - .idea
   - .github
   - vendor
-  - scripts
   - AGENT.md
 
 liquid:
