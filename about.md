@@ -24,4 +24,4 @@ I'm Tim, a software engineer based in London. Building software professionally s
 
 ## Otherwise
 
-Rock climbing. Qualified Mountain Training Rock Climbing Instructor. Often found at London's climbing walls or instructing at the Southern Sandstone.
+Rock climbing. [Qualified Mountain Training Rock Climbing Instructor](https://cms.tahdah.me/profile/award/1662225?awardId=528). Often found at London's climbing walls or instructing at the Southern Sandstone.
