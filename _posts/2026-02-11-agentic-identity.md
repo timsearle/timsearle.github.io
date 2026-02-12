@@ -10,42 +10,100 @@ tags:
   - "identity"
 ---
 
-Back in 2016, I was (mis)quoted as saying Siri App integrations would be the ["death of apps"](https://www.campaignlive.co.uk/article/apple-breaks-down-walled-garden-opening-siri-maps-developers/1398495#:~:text=The%20death%20of%20apps&text=Citing%20specific%20Apple%20iOS%20features,no%20longer%20by%20specific%20downloads.%22), but the intent behind the words was captured. In a recent interview with Peter Steinberger, the creator of AI assistant, [OpenClaw](https://openclaw.ai), he stated that 80% of apps will disappear because AI assistant will be able to handle the majority of features that users expect of their app. TODO: Add link.
+Back in 2016, I was (mis)quoted as saying Siri App integrations would be the ["death of apps"](https://www.campaignlive.co.uk/article/apple-breaks-down-walled-garden-opening-siri-maps-developers/1398495#:~:text=The%20death%20of%20apps&text=Citing%20specific%20Apple%20iOS%20features,no%20longer%20by%20specific%20downloads.%22), but I do think my general intent behind the words was captured well. In a recent [interview with Peter Steinberger](https://lexfridman.com/peter-steinberger-transcript#chapter18_ai_agents_will_replace_80_of_apps), the creator of AI assistant, [OpenClaw](https://openclaw.ai), he stated that 80% of apps will disappear because AI assistant will be able to handle the majority of features that users expect of their app. This statement was a de javu moment from my comments back in 2016 and it got me thinking.
 
-I recently deployed OpenClaw myself for some fun experimentation. Yes, it's littered with vulnerabilities (TODO link), security researchers are all over it, and there's been a lot of sensantionalist hype online - but it is a really important piece of software. It's a glimpse into the direction we're heading toward - mainstream AI personal assistants that can dynamically achieve _anything_, and yes perhaps, the "death of apps".
+I recently deployed OpenClaw myself for some fun experimentation. Yes, it's been littered with vulnerabilities, security researchers are all over it, and there's been a lot of sensationalist hype online - but it is an important piece of software. It's a glimpse into the direction we're heading toward - mainstream AI personal assistants that can dynamically achieve _anything_, and yes, perhaps the "death of apps".
 
 ## Security Vulnerabilities
 
-Personally, I prefer to keep a mental separation between OpenClaw's security vulnerabilities vs the overall security model AI assistants. Yes, there's vulnerabilities and [plenty of them](TODO), but these are generally coding problems, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve they'll occur less frequently - but none of these tools changed the part of the security threat model I was most concerned with in the current generation of AI assistants we're using.
+Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there's vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
 
-These agents require authorisation to act on your behalf, and invariably, that they do this by having access to your long-lived credentials, your tokens, your API keys, access to vital personal information, services, emails, your browser sessions etc.
+AI assistants require authorisation to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
 
-And in a world where prompt injection, malicious skills, and deep supply chain attacks specifically tagreting software like OpenClaw - these become the real targets - account takeovers and data exfiltration.
+And in a world where prompt injection, malicious skills, and deep supply chain attacks that specifically target software like OpenClaw - these high-value items become the real goals - account takeovers and data exfiltration.
 
 ## Configuring OpenClaw
 
-Although I was terrified at the prospect of security issues, I just _had_ to run this thing and form my own opinions. I actually ended up configuring my OpenClaw instance so aggressively constrained it was _almost_ useless.
+Although I was terrified by the coverage of the security issues, I just _had_ to run this thing and form my own opinions. I actually ended up configuring my OpenClaw instance so aggressively constrained it was _almost_ useless.
 
-- Dedicated Raspberry Pi Model 4 B
-- Inbound connectivity to the Pi only over SSH
-- An independent Linux user for OpenClaw with no interactive login, no SSH, no sudo, and only write/read to specific volumes
-- Docker daemon requires sudo, (that agent cannot obtain), Docker container that OpenClaw runs within as root, but with a user mapping to ensure if it escaped the container it would end up on the powerless user, not root.
-- Strict outbound port filtering with `ufw`
+- Dedicated Raspberry Pi 4 Model B
+- Inbound connectivity only over SSH
+- A dedicated Linux user for OpenClaw with no interactive login, no SSH, no sudo, and read/write access restricted to specific directories
+- Docker requires sudo that the dedicated user cannot obtain; OpenClaw runs as root inside the container, but user namespace remapping ensures a container escape would land as the powerless dedicated user, not root
+- Strict outbound port filtering with [ufw](https://wiki.ubuntu.com/UncomplicatedFirewall) (only DNS, HTTP/S, and NTP allowed)
+- No access to any accounts, browser sessions, secrets, et al.
 
-TODO: Insert simple diagram to break up the blog post
+```
+   ┌─────────────────────────────────────────────────────┐
+   │  Raspberry Pi 4                                     │
+   │                                                     │
+   │  ┌───────────────────────────────────────────────┐  │
+   │  │  Docker (requires sudo)                       │  │
+   │  │                                               │  │
+   │  │  ┌─────────────────────────────────────────┐  │  │
+   │  │  │  Container (root → mapped to 'agent')   │  │  │
+   │  │  │                                         │  │  │
+   │  │  │           ┌───────────┐                 │  │  │
+   │  │  │           │ OpenClaw  │                 │  │  │
+   │  │  │           └─────┬─────┘                 │  │  │
+   │  │  │                 │                       │  │  │
+   │  │  └─────────────────┼───────────────────────┘  │  │
+   │  │                    │                          │  │
+   │  └────────────────────┼──────────────────────────┘  │
+   │                       │                             │
+   │  'agent' user ────────┘  no login · no sudo         │
+   │   read/write: /var/lib/agent only                   │
+   │                                                     │
+   │  ┌────────── ufw ──────────┐                        │
+   │  │  IN:  SSH only          │                        │
+   │  │  OUT: DNS · HTTP/S · NTP│                        │
+   │  └─────────────────────────┘                        │
+   └─────────────────────────────────────────────────────┘
+           ▲
+           │ SSH tunnel to OpenClaw Gateway
+           │
+      ┌────┴────┐
+      │   Mac   │
+      └─────────┘
+```
 
-I could've gone further and allow-listed every egress hostname that OpenClaw wants to interact with, and extensively analysed the outbound `ufw` logs, but ultimately, none of this protects against OpenClaw connecting to some allow-listed host, and pumping data, keys, credentials out to it due to a prompt injection or compromised skill or tool.
+Initially, I was going to go further, and begin allow-listing every outbound hostname that OpenClaw wanted to interact with, and extensively analysed the outbound `ufw` logs, but realised this would just not be valuable. None of this protects against OpenClaw connecting to some allow-listed host, and pumping out data, keys and credentials out, due to a prompt injection or compromised skill or tool.
 
-Once this was done - I was now terrified to give it access to tools, to systems, worried about the one-click exploits that had been flagged, and how to prevent data exfiltration. This got me thinking about applying some basic Identity concepts to AI personal assistants and how this might look.  
+I was terrified to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
 
-## A vision for the future
+So, how can we apply some basic identity concepts to AI personal assistants, and what would a more secure architecture look like?
 
-How could we solve this? Not just for OpenClaw, but for all future AI assistants that all the big tech incumbents and start-ups are likely furiously working to make them accessible to the mainstream.
+## A basic model
 
-Well - ultimately, we need to govern the AI assistant's ability to make tool calls through policies, using mechanisms like step-up authentication, remote authorization.
+Let’s think this through, and see how could we solve this, not just for OpenClaw, but for any future AI assistants that breaks into the mainstream.
 
-We see "authorization" concepts like this already with Claude Code, Copilot CLI, Codex, where they prompt for permission before performing certain commands, storing your preferences as a policy. But we need more than this.
+We can split this problem into two areas, and in the Identity space, that is always going to be authentication and authorization.
 
+### Authentication
+
+One problem is that the assistant is just acting as **me**. It’s indistinguishable from me interacting with these services. This means it can perform any task, with no approvals, and most importantly, in response to a prompt feedback loop.
+
+Some people have tried to tackle this by giving their assistant their own accounts, with dedicated credentials, to segregate the  identity from their own. Ostensibly, this gives you some level of protection but it then _limits_ what OpenClaw is able to do on your behalf. It can’t handle my emails, or my appointments if it does not have access to them - and forwarding emails to it doesn’t _feel_ great, it’s not the autonomous and proactive AI assistant we all want.
+
+What we need here is the ability for an AI Assistant identity to truly act on my behalf. There needs to be an authentication event both from myself and the agent, and a composite grant created as a result that represents us **both** and what we can do.
+
+We’re not innovating new ground here - this journey is well-documented in [RFC 8693 - OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693).
+
+I want the following:
+
+- Provision an AI assistant with its own identity
+- Prior to performing a privileged action, the assistant will need to request for my authorization - in order to understand that I have authorised the task, we’ll want an authentication event. Think push notification.
+- The downstream service we are interacting with to understand that I have formally delegated the task to the agent.
+
+I mentioned authorization just now, so what does that look like?
+
+### Authorization
+
+We need to be able to formally govern the AI assistant's ability to make tool calls through policies. These policies will determine what the assistant can do, or what authentication challenge they may need to request of the “owner” prior to making a call.
+
+We already see "authorization" scenarios like this with Claude Code, Copilot CLI, Codex, where they prompt for permission before performing certain commands, storing your preferences as a policy. But we need more than this.
+
+[1Password have written an interesting article](https://1password.com/blog/its-openclaw) where they’re committing to solve the problem.
 [Some people are creating whole new identities for their agents](TODO 1Password Blog), with their own 1Password vault, segregating duties between the owner and the assistant - this is great, but it still doesn't stop the assistant doing things on your behalf that you do not want them to do as a result of prompt injection. So what we're really looking at here is a whole new identity layer, and expectation for third-party systems - think Open Banking levels of standardisation but across the entire digital landscape.
 
 I want to be able to:
@@ -55,10 +113,10 @@ I want to be able to:
 - I want to receive a simple, low-friction push notification, when the agent wants to perform sensitive tasks that I define with a OPA Rego policy inline with my risk tolerance, that when I accept, that's considered an authentication event, that the tool physically cannot progress without my input.
 - I do not want the AI agent to ever have direct access to credentials - I want it to interact through another service, where the policies are enforced and token exchanges can occur.
 
-The progress being made by Peter Steinberger and his OpenClaw contriobutoirs is incredible - everything is moving so fast, but what I find most exciting here is that although the entire AI assistant security model is brand new and needs to be carefully reasoned about, I think we can actually build the entire using pre-existing standards and technologies. The model Open Banking APIs must follow for you to make a bank transfer now, or grant access to your transactions, is an ideal model.
+The progress being made by Peter Steinberger and his OpenClaw contributors is incredible - everything is moving so fast, but what I find most exciting here is that although the entire AI assistant security model is brand new and needs to be carefully reasoned about, I think we can actually build the entire using pre-existing standards and technologies. The model Open Banking APIs must follow for you to make a bank transfer now, or grant access to your transactions, is an ideal model.
 
-The hard part is how do we get all third-party providers meeting these standards - Peter Steinberger said something very interesting about everything needs an API or other people will build them for you, you can see this through his vast suite of tools he's bundled with OpenClaw - the downside here is that if we're needing to rely on session hijacks/headless browsers, or similar, it makes the authorisastion model much harder. 
+The hard part is how do we get all third-party providers meeting these standards - Peter Steinberger said something very interesting about everything needs an API or other people will build them for you, you can see this through his vast suite of tools he's bundled with OpenClaw - the downside here is that if we're needing to rely on session hijacks/headless browsers, or similar, it makes the authorisation model much harder. 
 
 I think AI personal assistants are the future. I think tools like OpenClaw are incredible. But the whole system needs an overhaul, because people aren't going to be running these on their Raspberry Pis or Mac Minis.
 
-I can see a world where AI assistants and what they can easily and securely integrate with will determine the markets "demand" angle, services that do not integrate securely with AI assistants will slowly fade to insignifance, the same way how 20 years ago, we made a transition to businesses, no matter how small, even if you're a sole trader plumber, you need to have a website or be on a service, otherwise you will struggle to gain the demand for your service.
+I can see a world where AI assistants and what they can easily and securely integrate with will determine the markets "demand" angle, services that do not integrate securely with AI assistants will slowly fade to insignificance, the same way how 20 years ago, we made a transition to businesses, no matter how small, even if you're a sole trader plumber, you need to have a website or be on a service, otherwise you will struggle to gain the demand for your service.
