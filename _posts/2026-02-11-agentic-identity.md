@@ -2,7 +2,7 @@
 layout: post
 lang: en
 author: "Tim Searle"
-title: "Selling shovels"
+title: "Do you trust your assistant?"
 date: "2026-02-11 00:00:00"
 tags:
   - "ai"
