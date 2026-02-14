@@ -3,24 +3,16 @@ layout: post
 lang: en
 author: "Tim Searle"
 title: "Do you trust your assistant?"
-date: "2026-02-11 00:00:00"
+date: "2026-02-14 00:00:00"
 tags:
   - "ai"
   - "oauth"
   - "identity"
 ---
 
-Back in 2016, I was (mis)quoted as saying Siri App integrations would be the ["death of apps"](https://www.campaignlive.co.uk/article/apple-breaks-down-walled-garden-opening-siri-maps-developers/1398495#:~:text=The%20death%20of%20apps&text=Citing%20specific%20Apple%20iOS%20features,no%20longer%20by%20specific%20downloads.%22), but I do think my general intent behind the words was captured well. In a recent [interview with Peter Steinberger](https://lexfridman.com/peter-steinberger-transcript#chapter18_ai_agents_will_replace_80_of_apps), the creator of AI assistant, [OpenClaw](https://openclaw.ai), he stated that 80% of apps will disappear because AI assistant will be able to handle the majority of features that users expect of their app. This statement was a de javu moment from my comments back in 2016 and it got me thinking.
+I recently deployed OpenClaw myself for some fun experimentation. Yes, it's been littered with vulnerabilities, there are security researchers all over it, and there's been a lot of sensationalist hype online - but it is an important piece of software. 
 
-I recently deployed OpenClaw myself for some fun experimentation. Yes, it's been littered with vulnerabilities, security researchers are all over it, and there's been a lot of sensationalist hype online - but it is an important piece of software. It's a glimpse into the direction we're heading toward - mainstream AI personal assistants that can dynamically achieve _anything_, and yes, perhaps the "death of apps".
-
-## Security Vulnerabilities
-
-Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there's vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
-
-AI assistants require authorisation to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
-
-And in a world where prompt injection, malicious skills, and deep supply chain attacks that specifically target software like OpenClaw - these high-value items become the real goals - account takeovers and data exfiltration.
+It's a glimpse into the direction we're heading toward - mainstream AI personal assistants that can dynamically achieve _anything_, and perhaps the [”death of apps”](https://searle.dev/2026/02/14/death-of-apps.html).
 
 ## Configuring OpenClaw
 
@@ -33,47 +25,23 @@ Although I was terrified by the coverage of the security issues, I just _had_ to
 - Strict outbound port filtering with [ufw](https://wiki.ubuntu.com/UncomplicatedFirewall) (only DNS, HTTP/S, and NTP allowed)
 - No access to any accounts, browser sessions, secrets, et al.
 
-```
-   ┌─────────────────────────────────────────────────────┐
-   │  Raspberry Pi 4                                     │
-   │                                                     │
-   │  ┌───────────────────────────────────────────────┐  │
-   │  │  Docker (requires sudo)                       │  │
-   │  │                                               │  │
-   │  │  ┌─────────────────────────────────────────┐  │  │
-   │  │  │  Container (root → mapped to 'agent')   │  │  │
-   │  │  │                                         │  │  │
-   │  │  │           ┌───────────┐                 │  │  │
-   │  │  │           │ OpenClaw  │                 │  │  │
-   │  │  │           └─────┬─────┘                 │  │  │
-   │  │  │                 │                       │  │  │
-   │  │  └─────────────────┼───────────────────────┘  │  │
-   │  │                    │                          │  │
-   │  └────────────────────┼──────────────────────────┘  │
-   │                       │                             │
-   │  'agent' user ────────┘  no login · no sudo         │
-   │   read/write: /var/lib/agent only                   │
-   │                                                     │
-   │  ┌────────── ufw ──────────┐                        │
-   │  │  IN:  SSH only          │                        │
-   │  │  OUT: DNS · HTTP/S · NTP│                        │
-   │  └─────────────────────────┘                        │
-   └─────────────────────────────────────────────────────┘
-           ▲
-           │ SSH tunnel to OpenClaw Gateway
-           │
-      ┌────┴────┐
-      │   Mac   │
-      └─────────┘
-```
-
 Initially, I was going to go further, and begin allow-listing every outbound hostname that OpenClaw wanted to interact with, and extensively analysed the outbound `ufw` logs, but realised this would just not be valuable. None of this protects against OpenClaw connecting to some allow-listed host, and pumping out data, keys and credentials out, due to a prompt injection or compromised skill or tool.
 
 I was terrified to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
 
-So, how can we apply some basic identity concepts to AI personal assistants, and what would a more secure architecture look like?
+But for OpenClaw’s utility to maximised, it needs to have a large amount of access granted to some of the most sensitive credentials and services its owner possesses.
+
+## So, can we trust them?
+
+Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there's vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
+
+AI assistants require authorisation to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
+
+And in a world where prompt injection, malicious skills, and deep supply chain attacks that specifically target software like OpenClaw - these high-value items become the real goals - account takeovers and data exfiltration.
 
 ## A basic model
+
+So, how can we apply some basic identity concepts to AI personal assistants, and what would a more secure architecture look like?
 
 Let’s think this through, and see how could we solve this, not just for OpenClaw, but for any future AI assistants that breaks into the mainstream.
 
