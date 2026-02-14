@@ -39,7 +39,7 @@ AI assistants require authorisation to act on your behalf, and invariably, they 
 
 And in a world where prompt injection, malicious skills, and deep supply chain attacks that specifically target software like OpenClaw - these high-value items become the real goals - account takeovers and data exfiltration.
 
-## A basic model
+## The problem
 
 So, how can we apply some basic identity concepts to AI personal assistants, and what would a more secure architecture look like?
 
@@ -49,13 +49,56 @@ We can split this problem into two areas, and in the Identity space, that is alw
 
 ### Authentication
 
-One problem is that the assistant is just acting as **me**. It’s indistinguishable from me interacting with these services. This means it can perform any task, with no approvals, and most importantly, in response to a prompt feedback loop.
+When we talk about authentication, we always mean “who are you?”, and in the context of AI assistants we’re seeing two common patterns:
 
-Some people have tried to tackle this by giving their assistant their own accounts, with dedicated credentials, to segregate the  identity from their own. Ostensibly, this gives you some level of protection but it then _limits_ what OpenClaw is able to do on your behalf. It can’t handle my emails, or my appointments if it does not have access to them - and forwarding emails to it doesn’t _feel_ great, it’s not the autonomous and proactive AI assistant we all want.
+- They impersonate me
+- They have their own dedicated identity 
 
-What we need here is the ability for an AI Assistant identity to truly act on my behalf. There needs to be an authentication event both from myself and the agent, and a composite grant created as a result that represents us **both** and what we can do.
+Starting with impersonation, why is this an issue? The assistant is just acting as **me**. It’s indistinguishable from me interacting with these services. This means it can perform any task, with no approvals, and most importantly, in response to a prompt feedback loop.
 
-We’re not innovating new ground here - this journey is well-documented in [RFC 8693 - OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693).
+Some people have attempted to solve this with the second pattern. They give their assistant its own accounts, with dedicated credentials, to segregate the  identity from their own. [1Password have written an interesting article](https://1password.com/blog/its-openclaw) where they’re committing to solve this problem by adding broader support for these agentic identities.
+
+Yes, 1Password allows more guarded access to credentials, it stops them being stored on disk in plain text, but the non-deterministic model
+
+Ostensibly, this gives you some level of protection but it then _limits_ what an AI assistant is able to do on your behalf. It can’t handle my emails, or my appointments if it does not have access to them - and forwarding emails to it doesn’t _feel_ great, it’s not the autonomous and proactive AI assistant we all want. 
+
+How do these two identities interact? And most importantly, what can they do?
+
+### Authorization
+
+In the Identity space, when we talk about “what can you do?”, we’re talking about authorization.
+
+In the above section we talked about impersonation, and a segregation of duties with a specialised agentic identity. In both scenarios, how can we gate what the assistant can do?
+
+We could use markdown files, we could use system prompts, we could use a permissions model around tool calls (similar to that of Claude Code, Codex and Copilot CLI). We could even wait for the models to improve their prompt injection resilience and intrinsically trust them more - but these are all only operating “locally”, at a pre-API call phase, and do not solve the root issue that the agent must have access to the raw credentials in order to be able to perform the tasks it is trying to do.
+
+## An ideal flow
+
+So what do I actually want? Let’s use a high-privileged, sensitive journey, with a clear real-world analogy.
+
+I’m emailed an invoice, and I want my assistant to pay it on my behalf. This requires:
+
+- Access to my mailbox
+- Access to a payment method
+
+Would I want my assistant to automatically pay this? Of course not, in the same way if I had a human assistant I would not want them to blindly pay an invoice just because it landed in my inbox. So what controls do we need?
+
+- The assistant needs some scoped permission to access my mailbox because people invoice **me**, not my agent.
+- The assistant needs to be able to request authorization to perform the action from **me**.
+- The payment method, e.g., my bank, needs to be able to identify the agent making the payment on my behalf and verify that I have authorised them to make the payment on my behalf.
+
+To solve this - it requires improvements to both the AI assistant’s permissions model, but also the service we’re interacting with needs to provide some “AI Assistant-native” capabilities.
+
+## AI Assistant Native Integrations
+
+What we’re talking about require third-parties to plan, design and build for these use cases. If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. Assistants used to be the proviso of the wealthy, and special tooling was not needed - soon hundreds of millions of people will have them, and the entire identity and access model for these accounts needs to be upgraded.
+
+We are not innovating new ground here - this journey is well-documented in [RFC 8693 - OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693).
+
+1. My agent needs to authenticate with my mailbox provider
+2. It will request authorization from me to do so, and I will allow this for a specific amount of time.
+2. My mailbox provider is going to issue some short-lived credential with the appropriate scopes
+3. TODO:
 
 I want the following:
 
@@ -63,16 +106,9 @@ I want the following:
 - Prior to performing a privileged action, the assistant will need to request for my authorization - in order to understand that I have authorised the task, we’ll want an authentication event. Think push notification.
 - The downstream service we are interacting with to understand that I have formally delegated the task to the agent.
 
-I mentioned authorization just now, so what does that look like?
-
-### Authorization
-
 We need to be able to formally govern the AI assistant's ability to make tool calls through policies. These policies will determine what the assistant can do, or what authentication challenge they may need to request of the “owner” prior to making a call.
 
 We already see "authorization" scenarios like this with Claude Code, Copilot CLI, Codex, where they prompt for permission before performing certain commands, storing your preferences as a policy. But we need more than this.
-
-[1Password have written an interesting article](https://1password.com/blog/its-openclaw) where they’re committing to solve the problem.
-[Some people are creating whole new identities for their agents](TODO 1Password Blog), with their own 1Password vault, segregating duties between the owner and the assistant - this is great, but it still doesn't stop the assistant doing things on your behalf that you do not want them to do as a result of prompt injection. So what we're really looking at here is a whole new identity layer, and expectation for third-party systems - think Open Banking levels of standardisation but across the entire digital landscape.
 
 I want to be able to:
 
