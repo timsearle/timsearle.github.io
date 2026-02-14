@@ -19,5 +19,5 @@ In a recent [interview with Peter Steinberger](https://lexfridman.com/peter-stei
 
 Did my prediction come true? No. Siri still can’t do it. But OpenClaw can.
 
-Do I think an open-source tool will go mainstream and fulfil this goal? No. The same way decentralised crypto didn’t take off until companies centralised it and _made it_ adoptable. But will the big tech incumbents land something that does tap in to the average user and provide a launch pad for automations into their current apps? Almost certainly.
+Do I think an open-source tool will go mainstream and fulfil this goal? Probably not. It's an incredible piece of software, and has created an entire new industry category. But in the same way decentralised crypto didn’t take off until companies centralised it and _made it_ adoptable, I don't think this is _it_. But will the big tech incumbents land something that does tap in to the average user and provide a launch pad for automations into their current apps? Almost certainly.
 
