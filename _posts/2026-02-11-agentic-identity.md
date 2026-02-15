@@ -29,7 +29,7 @@ Initially, I was going to go further, and begin allow-listing every outbound hos
 
 I was terrified to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
 
-But for OpenClaw’s utility to maximised, it needs to have a large amount of access granted to some of the most sensitive credentials and services its owner possesses.
+But for OpenClaw’s utility to be maximised, it needs to have a large amount of access granted to some of the most sensitive credentials and services its owner possesses.
 
 ## So, can we trust them?
 
@@ -93,7 +93,7 @@ So what controls do we need?
 - Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the email service layer, not just the protocol. Think how a personal assistant has access to their client’s emails today.
 - The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying any invoices received
 - If the policy is met, the assistant needs to be able to obtain authorization **from me** to perform the action
-- The payment service must enforce that the authenticated actor (agent) acting on my behalf is making the request is authorised by the account principal (me)
+- The payment service must enforce that the authenticated actor (agent) acting on my behalf making the request is authorised by the account principal (me)
 
 To solve this, we need improvements to both the AI assistant’s permissions/policy model, but primarily, the services we’re interacting with need to provide some “AI Assistant-native” authorization capabilities.
 
@@ -111,7 +111,7 @@ I want to be really clear, we are not innovating new ground here - this journey 
 
 **We do not need to create new standards, what we need is greater adoption.**
 
-CIBA allows an AI assistant to create some sort of “intent” it wants to action, send that to the authorization server, and the authorisation server can then send me a request to authenticate via an out-of-band channel like a messenger app or assistant companion app as an act of approval of the request.
+CIBA allows an AI assistant to create some sort of “intent” that it wants to action, the assistant can then send that intent to the authorization server. The authorization server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
 
 Once the token is issued, the AI assistants personal identity, and my authorization, can be exchanged for the new token.
 
@@ -120,15 +120,17 @@ OAuth 2.0 Token Exchange results in an access token that is a composite identity
 - Actor (`act`): AI Assistant
 - Subject (`sub`): User
 
-So we need these services to not only allow us to create more fine-grained access to their respective services via their APIs, we also need them to understand that we are authorizing additional actors on our accounts that can have their own permissions around highly privileged actions.
+So we need these services to not only allow us to create more fine-grained access to their respective services via their APIs, we also need them to understand that we are authorising additional actors on our accounts that can have their own permissions around highly privileged actions.
+
+So, the specs are written, the technology exists, what’s stopping us here?
 
 ## What needs to happen?
 
-AI personal assistants are the future. Tools like OpenClaw are incredible. But the whole system needs an overhaul, because people aren't going to be running these on their Raspberry Pis or Mac Minis. They aren’t going to be threat-modelling their setup. They want magic.
+Services providers need to transition from the expectation that one account equals one identity - “everyone” will be using these assistants and we need to be able to allow delegated access for the assistant to act on our behalf within our banking, email, travel planning, shopping systems and more.
 
 The big tech companies who build our phones and our social media need to treat AI assistants as a first-class identity that can interact with our accounts.
 
-Services providers need to transition from the expectation that one account equals one identity - “everyone” will be using these assistants and we need to be able to allow delegated access for the assistant to act on our behalf within our banking, email, travel planning, shopping systems and more.
+The whole system needs an overhaul, because people aren't going to be running these assistants on their Raspberry Pis or Mac Minis. They aren’t going to be threat-modelling their setup. They want magic.
 
 This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first with adopting the FinTech regulations, are the ones that are winning today. The ones did not, are being screen-scraped by spurious software and are putting their customers and their data at risk.
 
