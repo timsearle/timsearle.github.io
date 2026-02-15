@@ -3,7 +3,7 @@ layout: post
 lang: en
 author: "Tim Searle"
 title: "Do you trust your assistant?"
-date: "2026-02-14 00:00:00"
+date: "2026-02-15 00:00:00"
 tags:
   - "ai"
   - "oauth"
