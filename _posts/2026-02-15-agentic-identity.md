@@ -10,7 +10,9 @@ tags:
   - "identity"
 ---
 
-I recently deployed OpenClaw myself for some fun experimentation. Yes, it's been littered with vulnerabilities, there are security researchers all over it, and there's been a lot of sensationalist hype online - but it is an important piece of software. 
+Personal assistants used to be the preserve of the wealthy, and special tooling was not needed for them to perform sensitive actions - trust levels were higher. Soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
+
+I recently deployed the popular AI assistant, [OpenClaw](https://openclaw.ai), myself for some fun experimentation. Yes, it's been littered with vulnerabilities, there are security researchers all over it, and there's been a lot of sensationalist hype online - but it is an important piece of software. 
 
 It's a glimpse into the direction we're heading toward - mainstream AI personal assistants that can dynamically achieve _anything_, and perhaps the [”death of apps”](https://searle.dev/2026/02/14/death-of-apps.html).
 
@@ -99,11 +101,9 @@ To solve this, we need improvements to both the AI assistant’s permissions/pol
 
 ## AI Assistant Native Integrations
 
-What we’re talking about requires third-parties to plan, design and build for these use cases. And we need this fast.
+What we’re talking about requires third-parties to plan, design and build for these use cases. And we need this fast. Their identity and access management model needs to natively provide the ability to delegate access to your virtual assistant, and tightly control and audit what it can do.
 
 If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. 
-
-Assistants used to be the preserve of the wealthy, and special tooling was not needed for them to perform sensitive actions. Trust levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
 
 ### OAuth and OpenID Connect
 
