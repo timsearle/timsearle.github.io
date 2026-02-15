@@ -43,7 +43,7 @@ And in a world where prompt injection, malicious skills, and deep supply chain a
 
 So, how can we apply some basic identity concepts, not just for OpenClaw, but for any AI personal assistants, and what would a more secure architecture look like?
 
-We can split this problem into two areas, and in the Identity space, that is always going to be authentication and authorization.
+We can split this problem into two areas, and in the Identity space, that is always going to be authentication and authorisation.
 
 ### Authentication
 
@@ -60,21 +60,21 @@ Some people have attempted to solve this with the second pattern. They give thei
 
 1Password allows for more guarded access to credentials, it stops them being stored on disk in plain text, and you could even enforce interactive access to those credentials. Ostensibly, this gives you some level of protection but it then _limits_ what an AI assistant is able to do on your behalf. 
 
-Without a solid authorization model in addition to the second identity, it can’t handle my emails, or my appointments if it does not have ongoing, secure, access to them. 
+Without a solid authorisation model in addition to the second identity, it can’t handle my emails, or my appointments if it does not have ongoing, secure, access to them. 
 
 Forwarding emails to it is not great, it’s not the autonomous and proactive AI assistant we all want.
 
 I don’t think these two patterns are mutually exclusive. So, how can they both interact? And most importantly, what are they allowed to do?
 
-### Authorization
+### authorisation
 
-In the Identity space, when we talk about “what can you do?”, we’re talking about authorization.
+In the Identity space, when we talk about “what can you do?”, we’re talking about authorisation.
 
 In the above section we talked about impersonation, and a segregation of duties with a specialised agentic identity. In both scenarios, how can we gate what the assistant can do?
 
 We could use markdown files, we could use system prompts, we could use a permissions model around tool calls (similar to that of Claude Code, Codex and Copilot CLI). We could even wait for the models to improve their prompt injection resilience and intrinsically trust them more - but these are all only operating “locally”, at a pre-API call phase, and do not solve the root issue that the agent must have access to the raw credentials in order to be able to perform the tasks it is trying to do.
 
-Once an AI assistant decides to make a tool call, and it has the credentials, that’s the end of the road for the security model - it already has the ability to perform its task, and potentially cause damage - we need authorization policies defined both within the assistant itself and also on the third-party services.
+Once an AI assistant decides to make a tool call, and it has the credentials, that’s the end of the road for the security model - it already has the ability to perform its task, and potentially cause damage - we need authorisation policies defined both within the assistant itself and also on the third-party services.
 
 ## An ideal flow
 
@@ -92,10 +92,10 @@ So what controls do we need?
 - Assistant needs its own user/machine identity.
 - Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the email service layer, not just the protocol. Think how a personal assistant has access to their client’s emails today.
 - The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying any invoices received
-- If the policy is met, the assistant needs to be able to obtain authorization **from me** to perform the action
+- If the policy is met, the assistant needs to be able to obtain authorisation **from me** to perform the action
 - The payment service must enforce that the authenticated actor (agent) acting on my behalf making the request is authorised by the account principal (me)
 
-To solve this, we need improvements to both the AI assistant’s permissions/policy model, but primarily, the services we’re interacting with need to provide some “AI Assistant-native” authorization capabilities.
+To solve this, we need improvements to both the AI assistant’s permissions/policy model, but primarily, the services we’re interacting with need to provide some “AI Assistant-native” authorisation capabilities.
 
 ## AI Assistant Native Integrations
 
@@ -111,9 +111,9 @@ I want to be really clear, we are not innovating new ground here - this journey 
 
 **We do not need to create new standards, what we need is greater adoption.**
 
-CIBA allows an AI assistant to create some sort of “intent” that it wants to action, the assistant can then send that intent to the authorization server. The authorization server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
+CIBA allows an AI assistant to create some sort of “intent” that it wants to action, the assistant can then send that intent to the authorisation server. The authorisation server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
 
-Once the token is issued, the AI assistants personal identity, and my authorization, can be exchanged for the new token.
+Once the token is issued, the AI assistants personal identity, and my authorisation, can be exchanged for the new token.
 
 OAuth 2.0 Token Exchange results in an access token that is a composite identity of two participants:
 
