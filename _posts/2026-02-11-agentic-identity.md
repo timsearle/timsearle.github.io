@@ -83,21 +83,23 @@ So what do I actually want? Let’s use a high-privileged, sensitive journey, wi
 I’m emailed an invoice, and I want my assistant to pay it on my behalf. This requires:
 
 - Access to my mailbox
-- Eligible access to a payment service
+- Access to a payment service
 
-Would I want my assistant to automatically pay this? Of course not, in the same way if I had a human assistant I would not want them to immediately pay an invoice just because it landed in my inbox. So what controls do we need?
+Would I want my assistant to automatically pay this? Of course not. In the same way if I had a human assistant I would not want them to immediately pay an invoice just because it landed in my inbox. 
+
+So what controls do we need?
 
 - Assistant needs its own user/machine identity.
-- Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the application layer.
-- The assistant needs a sensitive policy that determines whether they are allowed to perform the privileged action, such as paying invoices received
-- Once the policy is passed, the assistant needs to be able to obtain authorization **from me** to perform the action
+- Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the email service layer, not just the protocol. Think how a personal assistant has access to their client’s emails today.
+- The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying any invoices received
+- If the policy is met, the assistant needs to be able to obtain authorization **from me** to perform the action
 - The payment service must enforce that the authenticated actor (agent) acting on my behalf is making the request is authorised by the account principal (me)
 
-To solve this, we need improvements to both the AI assistant’s permissions/policy model, but also the services we’re interacting with need to provide some “AI Assistant-native” authorization capabilities.
+To solve this, we need improvements to both the AI assistant’s permissions/policy model, but primarily, the services we’re interacting with need to provide some “AI Assistant-native” authorization capabilities.
 
 ## AI Assistant Native Integrations
 
-What we’re talking about requires third-parties to plan, design and build for these use cases. 
+What we’re talking about requires third-parties to plan, design and build for these use cases. And we need this fast.
 
 If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. 
 
