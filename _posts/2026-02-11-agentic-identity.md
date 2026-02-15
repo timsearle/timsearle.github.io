@@ -122,18 +122,20 @@ OAuth 2.0 Token Exchange results in an access token that is a composite identity
 
 So we need these services to not only allow us to create more fine-grained access to their respective services via their APIs, we also need them to understand that we are authorizing additional actors on our accounts that can have their own permissions around highly privileged actions.
 
-## Where do we need to get to?
+## What needs to happen?
 
-We need to be able to formally govern the AI assistant's ability to make tool calls through policies. These policies will determine what the assistant can do, or what authentication challenge they may need to request of the “owner” prior to making a call.
+AI personal assistants are the future. Tools like OpenClaw are incredible. But the whole system needs an overhaul, because people aren't going to be running these on their Raspberry Pis or Mac Minis. They aren’t going to be threat-modelling their setup. They want magic.
 
-We already see "authorization" scenarios like this with Claude Code, Copilot CLI, Codex, where they prompt for permission before performing certain commands, storing your preferences as a policy. But we need more than this.
+The big tech companies who build our phones and our social media need to treat AI assistants as a first-class identity that can interact with our accounts.
 
-The progress being made by the OpenClaw contributors is incredible - everything is moving so fast, but what I find most exciting here is that although the entire AI assistant security model is brand new and needs to be carefully reasoned about, I think we can actually build the entire AI-assistant authorization system using pre-existing standards and technologies. The model Open Banking APIs must follow for you to make a bank transfer now, or grant access to your transactions, is an ideal model.
+Services providers need to transition from the expectation that one account equals one identity - “everyone” will be using these assistants and we need to be able to allow delegated access for the assistant to act on our behalf within our banking, email, travel planning, shopping systems and more.
 
-The hard part is how do we get all third-party providers meeting these standards - Peter Steinberger said something very interesting about everything needs an API or other people will build them for you, you can see this through his vast suite of tools he's bundled with OpenClaw - the downside here is that if we're needing to rely on session hijacks/headless browsers, or similar, it makes the authorisation model much harder. 
+This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first with adopting the FinTech regulations, are the ones that are winning today. The ones did not, are being screen-scraped by spurious software and are putting their customers and their data at risk.
 
-I think AI personal assistants are the future. I think tools like OpenClaw are incredible. But the whole system needs an overhaul, because people aren't going to be running these on their Raspberry Pis or Mac Minis.
+Users need simple, low-friction approval flows, that fit into their day-to-day life. Think push notifications, not config files.
 
-I can see a world where AI assistants and what they can easily and securely integrate with will determine the markets "demand" angle, services that do not integrate securely with AI assistants will slowly fade to insignificance, the same way how 20 years ago, we made a transition to businesses, no matter how small, even if you're a sole trader plumber, you need to have a website or be on a service, otherwise you will struggle to gain the demand for your service.
+What happens if services don’t do this?
 
-If an AI assistant can securely interact with your service - your market will be smaller.
+20 years ago, we made a transition, no matter how small your business is, even if you're a sole trader like a plumber, you need to have a website or be on using a service, otherwise you will struggle to gain the demand for your service
+
+If an AI assistant can’t securely interact with your service or see it - your market will be smaller and your service suffer.
