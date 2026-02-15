@@ -136,6 +136,6 @@ Users need simple, low-friction approval flows, that fit into their day-to-day l
 
 What happens if services don’t do this?
 
-20 years ago, we made a transition, no matter how small your business is, even if you're a sole trader like a plumber, you need to have a website or be on using a service, otherwise you will struggle to gain the demand for your service
+20 years ago, we made a transition, no matter how small your business is, you need to have a website or be using an online service for customer acquisition, otherwise you will struggle and your service will suffer.
 
-If an AI assistant can’t securely interact with your service or see it - your market will be smaller and your service suffer.
+Now? If an AI assistant can’t securely interact with, or see, your service - you **will** struggle and your service suffer.
