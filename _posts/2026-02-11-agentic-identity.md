@@ -37,7 +37,7 @@ Personally, I keep a mental separation between OpenClaw's security vulnerabiliti
 
 AI assistants currently operate through having some ability to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
 
-And in a world where prompt injection, malicious skills, and deep supply chain attacks that target software like OpenClaw - these high-value items become the real goals, enabling account takeovers and data exfiltration.
+In a world of prompt injection, malicious skills, and deep supply chain attacks targeting software like OpenClaw, these high-value items become the real goals, enabling account takeovers and data exfiltration.
 
 ## The problem
 
@@ -93,7 +93,7 @@ So what controls do we need?
 - Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the email service layer, not just the protocol. Think how a personal assistant has access to their client’s emails today.
 - The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying any invoices received
 - If the policy is met, the assistant needs to be able to obtain authorisation **from me** to perform the action
-- The payment service must enforce that the authenticated actor (agent) acting on my behalf making the request is authorised by the account principal (me)
+- The payment service must verify that the assistant making the request is authorised to act on the behalf of the account principal (me)
 
 To solve this, we need improvements to both the AI assistant’s permissions/policy model, but primarily, the services we’re interacting with need to provide some “AI Assistant-native” authorisation capabilities.
 
@@ -140,4 +140,4 @@ What happens if services don’t do this?
 
 20 years ago, we made a transition, no matter how small your business is, you need to have a website or be using an online service for customer acquisition, otherwise you will struggle and your service will suffer.
 
-Now? If an AI assistant can’t securely interact with, or see, your service - you **will** struggle and your service suffer.
+Now? If an AI assistant can’t securely interact with, or see, your service - you **will** struggle and your service **will** suffer.
