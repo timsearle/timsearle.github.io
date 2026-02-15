@@ -132,7 +132,7 @@ The big tech companies who build our phones and our social media need to treat A
 
 The whole system needs an overhaul, because people aren't going to be running these assistants on their Raspberry Pis or Mac Minis. They aren’t going to be threat-modelling their setup. They want magic.
 
-This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first with adopting the FinTech regulations, are the ones that are winning today. The ones did not, are being screen-scraped by spurious software and are putting their customers and their data at risk.
+This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first with adopting the FinTech regulations, are the ones that are winning today. The ones that didn’t are being screen-scraped by spurious software and are putting their customers and their data at risk.
 
 Users need simple, low-friction approval flows, that fit into their day-to-day life. Think push notifications, not config files.
 
