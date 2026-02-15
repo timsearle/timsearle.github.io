@@ -122,17 +122,12 @@ We need to be able to formally govern the AI assistant's ability to make tool ca
 
 We already see "authorization" scenarios like this with Claude Code, Copilot CLI, Codex, where they prompt for permission before performing certain commands, storing your preferences as a policy. But we need more than this.
 
-I want to be able to:
-
-- Provision an AI assistant with its own identity
-- Generate short-lived, scoped access tokens on my own accounts that are delegated to my assistant, that must be provided a composite identity - TODO: OAuth on behalf of flow
-- I want to receive a simple, low-friction push notification, when the agent wants to perform sensitive tasks that I define with a OPA Rego policy inline with my risk tolerance, that when I accept, that's considered an authentication event, that the tool physically cannot progress without my input.
-- I do not want the AI agent to ever have direct access to credentials - I want it to interact through another service, where the policies are enforced and token exchanges can occur.
-
-The progress being made by Peter Steinberger and his OpenClaw contributors is incredible - everything is moving so fast, but what I find most exciting here is that although the entire AI assistant security model is brand new and needs to be carefully reasoned about, I think we can actually build the entire using pre-existing standards and technologies. The model Open Banking APIs must follow for you to make a bank transfer now, or grant access to your transactions, is an ideal model.
+The progress being made by the OpenClaw contributors is incredible - everything is moving so fast, but what I find most exciting here is that although the entire AI assistant security model is brand new and needs to be carefully reasoned about, I think we can actually build the entire AI-assistant authorization system using pre-existing standards and technologies. The model Open Banking APIs must follow for you to make a bank transfer now, or grant access to your transactions, is an ideal model.
 
 The hard part is how do we get all third-party providers meeting these standards - Peter Steinberger said something very interesting about everything needs an API or other people will build them for you, you can see this through his vast suite of tools he's bundled with OpenClaw - the downside here is that if we're needing to rely on session hijacks/headless browsers, or similar, it makes the authorisation model much harder. 
 
 I think AI personal assistants are the future. I think tools like OpenClaw are incredible. But the whole system needs an overhaul, because people aren't going to be running these on their Raspberry Pis or Mac Minis.
 
 I can see a world where AI assistants and what they can easily and securely integrate with will determine the markets "demand" angle, services that do not integrate securely with AI assistants will slowly fade to insignificance, the same way how 20 years ago, we made a transition to businesses, no matter how small, even if you're a sole trader plumber, you need to have a website or be on a service, otherwise you will struggle to gain the demand for your service.
+
+If an AI assistant can securely interact with your service - your market will be smaller.
