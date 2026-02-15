@@ -79,32 +79,44 @@ So what do I actually want? Let’s use a high-privileged, sensitive journey, wi
 I’m emailed an invoice, and I want my assistant to pay it on my behalf. This requires:
 
 - Access to my mailbox
-- Access to a payment method
+- Eligible access to a payment service
 
-Would I want my assistant to automatically pay this? Of course not, in the same way if I had a human assistant I would not want them to blindly pay an invoice just because it landed in my inbox. So what controls do we need?
+Would I want my assistant to automatically pay this? Of course not, in the same way if I had a human assistant I would not want them to immediately pay an invoice just because it landed in my inbox. So what controls do we need?
 
-- The assistant needs some scoped permission to access my mailbox because people invoice **me**, not my agent.
-- The assistant needs to be able to request authorization to perform the action from **me**.
-- The payment method, e.g., my bank, needs to be able to identify the agent making the payment on my behalf and verify that I have authorised them to make the payment on my behalf.
+- Assistant needs its own user/machine identity.
+- Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the application layer.
+- The assistant needs a sensitive policy that determines whether they are allowed to perform the privileged action, such as paying invoices received
+- Once the policy is passed, the assistant needs to be able to obtain authorization **from me** to perform the action
+- The payment service must enforce that the authenticated actor (agent) acting on my behalf is making the request is authorised by the account principal (me)
 
-To solve this - it requires improvements to both the AI assistant’s permissions model, but also the service we’re interacting with needs to provide some “AI Assistant-native” capabilities.
+To solve this, we need improvements to both the AI assistant’s permissions/policy model, but also the services we’re interacting with need to provide some “AI Assistant-native” authorization capabilities.
 
 ## AI Assistant Native Integrations
 
-What we’re talking about require third-parties to plan, design and build for these use cases. If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. Assistants used to be the proviso of the wealthy, and special tooling was not needed - soon hundreds of millions of people will have them, and the entire identity and access model for these accounts needs to be upgraded.
+What we’re talking about requires third-parties to plan, design and build for these use cases. 
 
-We are not innovating new ground here - this journey is well-documented in [RFC 8693 - OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693).
+If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. 
 
-1. My agent needs to authenticate with my mailbox provider
-2. It will request authorization from me to do so, and I will allow this for a specific amount of time.
-2. My mailbox provider is going to issue some short-lived credential with the appropriate scopes
-3. TODO:
+Assistants used to be the proviso of the wealthy, and special tooling was not needed for them to perform sensitive actions, trust-levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
 
-I want the following:
+### OAuth and OpenID Connect
 
-- Provision an AI assistant with its own identity
-- Prior to performing a privileged action, the assistant will need to request for my authorization - in order to understand that I have authorised the task, we’ll want an authentication event. Think push notification.
-- The downstream service we are interacting with to understand that I have formally delegated the task to the agent.
+I want to be really clear, we are not innovating new ground here - this journey is well-supported by the [OpenID Connect Client-Initiated Backchannel Authentication (CIBA)](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html) flow, and the [RFC 8693 - OAuth 2.0 Token Exchange](https://datatracker.ietf.org/doc/html/rfc8693) specification.
+
+**We do not need to create new standards, what we need is greater adoption.**
+
+CIBA allows an AI assistant to create some sort of “intent” it wants to action, send that to the authorization server, and the authorisation server can then send me a request to authenticate via an out-of-band channel like a messenger app or assistant companion app as an act of approval of the request.
+
+Once the token is issued, the AI assistants personal identity, and my authorization, can be exchanged for the new token.
+
+OAuth 2.0 Token Exchange results in an access token that is a composite identity of two participants:
+
+- Actor (`act`): AI Assistant
+- Subject (`sub`): User
+
+So we need these services to not only allow us to create more fine-grained access to their respective services via their APIs, we also need them to understand that we are authorizing additional actors on our accounts that can have their own permissions around highly privileged actions.
+
+## Where do we need to get to?
 
 We need to be able to formally govern the AI assistant's ability to make tool calls through policies. These policies will determine what the assistant can do, or what authentication challenge they may need to request of the “owner” prior to making a call.
 
