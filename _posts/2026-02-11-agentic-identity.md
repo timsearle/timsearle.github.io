@@ -23,17 +23,17 @@ Although I was terrified by the coverage of the security issues, I just _had_ to
 - A dedicated Linux user for OpenClaw with no interactive login, no SSH, no sudo, and read/write access restricted to specific directories
 - Docker requires sudo that the dedicated user cannot obtain; OpenClaw runs as root inside the container, but user namespace remapping ensures a container escape would land as the powerless dedicated user, not root
 - Strict outbound port filtering with [ufw](https://wiki.ubuntu.com/UncomplicatedFirewall) (only DNS, HTTP/S, and NTP allowed)
-- No access to any accounts, browser sessions, secrets, et al.
+- No access to any accounts, browser sessions and secrets.
 
 Initially, I was going to go further, and begin allow-listing every outbound hostname that OpenClaw wanted to interact with, and extensively analysed the outbound `ufw` logs, but realised this would just not be valuable. None of this protects against OpenClaw connecting to some allow-listed host, and pumping out data, keys and credentials, due to a prompt injection or compromised skill or tool.
 
-I was terrified to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
+I was still hesitant to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
 
 But for OpenClaw’s utility to be maximised, it needs to have a large amount of access granted to some of the most sensitive credentials and services its owner possesses.
 
 ## So, can we trust them?
 
-Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there's vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
+Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there are vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
 
 AI assistants currently operate through having some ability to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
 
@@ -66,7 +66,7 @@ Forwarding emails to it is not great, it’s not the autonomous and proactive AI
 
 I don’t think these two patterns are mutually exclusive. So, how can they both interact? And most importantly, what are they allowed to do?
 
-### authorisation
+### Authorisation
 
 In the Identity space, when we talk about “what can you do?”, we’re talking about authorisation.
 
@@ -91,7 +91,7 @@ So what controls do we need?
 
 - Assistant needs its own user/machine identity.
 - Assistant needs read-access to **my** emails. E.g., perhaps IMAP-only, but ideally these scopes are handled at the email service layer, not just the protocol. Think how a personal assistant has access to their client’s emails today.
-- The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying any invoices received
+- The assistant needs a policy that determines whether they are allowed to perform the privileged/sensitive action, such as paying invoices
 - If the policy is met, the assistant needs to be able to obtain authorisation **from me** to perform the action
 - The payment service must verify that the assistant making the request is authorised to act on the behalf of the account principal (me)
 
@@ -103,7 +103,7 @@ What we’re talking about requires third-parties to plan, design and build for 
 
 If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. 
 
-Assistants used to be the preserve of the wealthy, and special tooling was not needed for them to perform sensitive actions, trust-levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
+Assistants used to be the preserve of the wealthy, and special tooling was not needed for them to perform sensitive actions. Trust levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
 
 ### OAuth and OpenID Connect
 
@@ -111,7 +111,7 @@ I want to be really clear, we are not innovating new ground here - this journey 
 
 **We do not need to create new standards, what we need is greater adoption.**
 
-CIBA allows an AI assistant to create some sort of “intent” that it wants to action, the assistant can then send that intent to the authorisation server. The authorisation server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
+CIBA allows an AI assistant to create some sort of “intent” that it wants to act on, the assistant can then send that intent to the authorisation server. The authorisation server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
 
 Once the token is issued, the AI assistant’s personal identity, and my authorisation, can be exchanged for the new token.
 
