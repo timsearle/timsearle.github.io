@@ -25,7 +25,7 @@ Although I was terrified by the coverage of the security issues, I just _had_ to
 - Strict outbound port filtering with [ufw](https://wiki.ubuntu.com/UncomplicatedFirewall) (only DNS, HTTP/S, and NTP allowed)
 - No access to any accounts, browser sessions, secrets, et al.
 
-Initially, I was going to go further, and begin allow-listing every outbound hostname that OpenClaw wanted to interact with, and extensively analysed the outbound `ufw` logs, but realised this would just not be valuable. None of this protects against OpenClaw connecting to some allow-listed host, and pumping out data, keys and credentials out, due to a prompt injection or compromised skill or tool.
+Initially, I was going to go further, and begin allow-listing every outbound hostname that OpenClaw wanted to interact with, and extensively analysed the outbound `ufw` logs, but realised this would just not be valuable. None of this protects against OpenClaw connecting to some allow-listed host, and pumping out data, keys and credentials, due to a prompt injection or compromised skill or tool.
 
 I was terrified to give it access to tools, to systems, worried about the [one-click exploits](https://x.com/theonejvo/status/2016510190464675980) that had been flagged. 
 
@@ -113,7 +113,7 @@ I want to be really clear, we are not innovating new ground here - this journey 
 
 CIBA allows an AI assistant to create some sort of “intent” that it wants to action, the assistant can then send that intent to the authorisation server. The authorisation server can then send me a request to authenticate via an out-of-band channel - think push notification - for me to approve the request.
 
-Once the token is issued, the AI assistants personal identity, and my authorisation, can be exchanged for the new token.
+Once the token is issued, the AI assistant’s personal identity, and my authorisation, can be exchanged for the new token.
 
 OAuth 2.0 Token Exchange results in an access token that is a composite identity of two participants:
 
@@ -126,13 +126,13 @@ So, the specs are written, the technology exists, what’s stopping us here?
 
 ## What needs to happen?
 
-Services providers need to transition from the expectation that one account equals one identity - “everyone” will be using these assistants and we need to be able to allow delegated access for the assistant to act on our behalf within our banking, email, travel planning, shopping systems and more.
+Service providers need to transition from the expectation that one account equals one identity - “everyone” will be using these assistants and we need to be able to allow delegated access for the assistant to act on our behalf within our banking, email, travel planning, shopping systems and more.
 
 The big tech companies who build our phones and our social media need to treat AI assistants as a first-class identity that can interact with our accounts.
 
 The whole system needs an overhaul, because people aren't going to be running these assistants on their Raspberry Pis or Mac Minis. They aren’t going to be threat-modelling their setup. They want magic.
 
-This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first with adopting the FinTech regulations, are the ones that are winning today. The ones that didn’t are being screen-scraped by spurious software and are putting their customers and their data at risk.
+This isn’t going to be optional. This is the same journey banks went through with the Open Banking push. The banks that got there first adopting the FinTech regulations are the ones that are winning today. The ones that didn’t are being screen-scraped by spurious software and are putting their customers and their data at risk.
 
 Users need simple, low-friction approval flows, that fit into their day-to-day life. Think push notifications, not config files.
 
