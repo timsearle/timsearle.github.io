@@ -35,34 +35,36 @@ But for OpenClaw’s utility to maximised, it needs to have a large amount of ac
 
 Personally, I keep a mental separation between OpenClaw's security vulnerabilities and the general security model of AI assistants. Yes, there's vulnerabilities and [plenty of them](https://github.com/openclaw/openclaw/security/advisories), but these are generally coding, control flow and logic problems. These will be solved by researchers, by SAST, DAST and SCA tools, and as the models improve, the issues will occur less frequently - but none of these mitigations change the part of the threat model I am most concerned with in the current generation of AI assistants we're using.
 
-AI assistants require authorisation to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
+AI assistants currently operate through having some ability to act on your behalf, and invariably, they do this by having direct access to your long-lived credentials, your tokens, your API keys, your browser sessions, your email, and more.
 
-And in a world where prompt injection, malicious skills, and deep supply chain attacks that specifically target software like OpenClaw - these high-value items become the real goals - account takeovers and data exfiltration.
+And in a world where prompt injection, malicious skills, and deep supply chain attacks that target software like OpenClaw - these high-value items become the real goals, enabling account takeovers and data exfiltration.
 
 ## The problem
 
-So, how can we apply some basic identity concepts to AI personal assistants, and what would a more secure architecture look like?
-
-Let’s think this through, and see how could we solve this, not just for OpenClaw, but for any future AI assistants that breaks into the mainstream.
+So, how can we apply some basic identity concepts, not just for OpenClaw, but for any AI personal assistants, and what would a more secure architecture look like?
 
 We can split this problem into two areas, and in the Identity space, that is always going to be authentication and authorization.
 
 ### Authentication
 
-When we talk about authentication, we always mean “who are you?”, and in the context of AI assistants we’re seeing two common patterns:
+When we talk about authentication, we always mean “who are you?”, and in the context of AI assistants we currently see two common patterns:
 
-- They impersonate me
-- They have their own dedicated identity 
+- They impersonate their owner
+- They have their own dedicated identity (delegation)
 
 Starting with impersonation, why is this an issue? The assistant is just acting as **me**. It’s indistinguishable from me interacting with these services. This means it can perform any task, with no approvals, and most importantly, in response to a prompt feedback loop.
 
-Some people have attempted to solve this with the second pattern. They give their assistant its own accounts, with dedicated credentials, to segregate the  identity from their own. [1Password have written an interesting article](https://1password.com/blog/its-openclaw) where they’re committing to solve this problem by adding broader support for these agentic identities.
+Some people have attempted to solve this with the second pattern. They give their assistant its own accounts, with dedicated credentials, to segregate the identity from their own.  This is often referred to as “Delegation”. 
 
-Yes, 1Password allows more guarded access to credentials, it stops them being stored on disk in plain text, but the non-deterministic model
+[1Password have written an interesting article](https://1password.com/blog/its-openclaw) where they’re committing to solve this problem by adding broader support for these agentic identities.
 
-Ostensibly, this gives you some level of protection but it then _limits_ what an AI assistant is able to do on your behalf. It can’t handle my emails, or my appointments if it does not have access to them - and forwarding emails to it doesn’t _feel_ great, it’s not the autonomous and proactive AI assistant we all want. 
+1Password allows for more guarded access to credentials, it stops them being stored on disk in plain text, and you could even enforce interactive access to those credentials. Ostensibly, this gives you some level of protection but it then _limits_ what an AI assistant is able to do on your behalf. 
 
-How do these two identities interact? And most importantly, what can they do?
+Without a solid authorization model in addition to the second identity, it can’t handle my emails, or my appointments if it does not have ongoing, secure, access to them. 
+
+Forwarding emails to it is not great, it’s not the autonomous and proactive AI assistant we all want.
+
+I don’t think these two patterns are mutually exclusive. So, how can they both interact? And most importantly, what are they allowed to do?
 
 ### Authorization
 
@@ -71,6 +73,8 @@ In the Identity space, when we talk about “what can you do?”, we’re talkin
 In the above section we talked about impersonation, and a segregation of duties with a specialised agentic identity. In both scenarios, how can we gate what the assistant can do?
 
 We could use markdown files, we could use system prompts, we could use a permissions model around tool calls (similar to that of Claude Code, Codex and Copilot CLI). We could even wait for the models to improve their prompt injection resilience and intrinsically trust them more - but these are all only operating “locally”, at a pre-API call phase, and do not solve the root issue that the agent must have access to the raw credentials in order to be able to perform the tasks it is trying to do.
+
+Once an AI assistant decides to make a tool call, and it has the credentials, that’s the end of the road for the security model - it already has the ability to perform its task, and potentially cause damage - we need authorization policies defined both within the assistant itself and also on the third-party services.
 
 ## An ideal flow
 
@@ -97,7 +101,7 @@ What we’re talking about requires third-parties to plan, design and build for 
 
 If companies do not provide these solutions, people will find workarounds, and these workarounds will have a worse risk-posture. 
 
-Assistants used to be the proviso of the wealthy, and special tooling was not needed for them to perform sensitive actions, trust-levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
+Assistants used to be the preserve of the wealthy, and special tooling was not needed for them to perform sensitive actions, trust-levels were higher - soon hundreds of millions of people will have them, and the entire identity and access model for these services needs to be upgraded.
 
 ### OAuth and OpenID Connect
 
