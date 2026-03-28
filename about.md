@@ -4,15 +4,15 @@ title: "About"
 permalink: /about/
 ---
 
-I'm Tim, a software engineer based in London. Building software professionally since 2009. I focus on applications that put the user experience first—details matter. Current interests include zero-trust systems, mobile application security, and user privacy.
+I'm Tim, a software engineer based in London. I've been building software professionally since 2009. I focus on applications that put the user experience first—details matter. Current interests include zero-trust systems, mobile application security, and user privacy.
 
 ## Now
 
-**Principal Software Engineer** at Marks & Spencer — leading authentication APIs for Identity and Access Management and building out the Developer Platform with a focus on native mobile engineering.
+**Security Engineer** at Meta - working on Identity & Access Management at scale, building authorization solutions for workforce and workload identities.
 
 **[Altilium](https://altilium.app)** — an iOS app in SwiftUI that helps cardiac physiologists optimise pacemaker battery outputs.
 
-## Code
+### Other projects
 
 [swift-dependency-graph](https://github.com/timsearle/swift-dependency-graph) — Visualize Swift package dependencies
 
@@ -21,6 +21,10 @@ I'm Tim, a software engineer based in London. Building software professionally s
 [Euclid](https://github.com/timsearle/euclid) — Great-circle mathematics for Core Location
 
 [Bind](https://github.com/karmarama/bind) — Lightweight reactive streams
+
+## Previously
+
+**Principal Software Engineer** at Marks & Spencer — led the Identity team in modernising customer authentication, and building the internal Developer Platform to accelerate engineering productivity and increase product stability.
 
 ## Otherwise
 
