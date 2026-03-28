@@ -12,7 +12,7 @@ I'm Tim, a software engineer based in London. I've been building software profes
 
 **[Altilium](https://altilium.app)** — an iOS app in SwiftUI that helps cardiac physiologists optimise pacemaker battery outputs.
 
-### Other projects
+## Other projects
 
 [swift-dependency-graph](https://github.com/timsearle/swift-dependency-graph) — Visualize Swift package dependencies
 
