@@ -2,7 +2,7 @@
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; min-width:320px; }
-img { display:block; max-width:100%; }
+img { display:block; max-width:100%; height:auto; }
 a { color:inherit; text-underline-offset:.2em; }
 a:focus-visible { outline:3px solid #225db3; outline-offset:5px; border-radius:2px; }
 ::selection { background:#f7e5dc; color:var(--graphite); }
