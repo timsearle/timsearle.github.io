@@ -1,3 +1,7 @@
+---
+# Set this to the numeric Apple ID only once Slow is available for download on the App Store.
+app_store_id:
+---
 <!doctype html>
 <html lang="en-GB">
   <head>
@@ -22,11 +26,6 @@
         <img src="assets/app-icon.png" width="38" height="38" alt="">
         <span>Slow</span>
       </a>
-      <nav aria-label="Main navigation">
-        <a href="#experience">The experience</a>
-        <a href="#details">Details</a>
-        <a href="privacy/">Privacy</a>
-      </nav>
     </header>
 
     <main id="main">
@@ -36,8 +35,11 @@
           <h1 id="hero-title"><em>Slow</em> is fast.<br>Fast is <em>Slow</em></h1>
           <div class="hero-actions">
             <a class="button button-dark" href="#experience">Meet Slow <span aria-hidden="true">↗</span></a>
-            <!-- When the product page is available, replace this with Apple's official black badge from App Store Marketing Tools, linked to https://apps.apple.com/app/id<Apple ID>. The Apple ID is in App Store Connect > App Information. -->
+            {% if page.app_store_id %}
+            <a class="app-store-badge" href="https://apps.apple.com/app/id{{ page.app_store_id }}" aria-label="Download Slow on the App Store"><img src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-gb?size=250x83" width="163" height="54" alt="Download on the App Store"></a>
+            {% else %}
             <div class="app-store-placeholder"><span>App Store</span><strong>Link coming soon</strong></div>
+            {% endif %}
             <span>For iPhone, iPad and Mac</span>
           </div>
         </div>
@@ -111,10 +113,9 @@
         </div>
       </section>
 
-      <section class="closing" aria-labelledby="closing-title">
+      <section class="closing">
         <img src="assets/app-icon.png" width="100" height="100" alt="Slow app icon">
         <p class="section-kicker">Slow · Learn by ear</p>
-        <h2 id="closing-title">Stay a little longer<br>with the music.</h2>
         <p>Available on iPhone, iPad and Mac.</p>
         <a class="text-link" href="mailto:support@tryslow.io">Get in touch <span aria-hidden="true">↗</span></a>
       </section>
@@ -123,7 +124,7 @@
     <footer class="site-footer">
       <div class="footer-brand"><img src="assets/app-icon.png" width="30" height="30" alt=""><strong>Slow</strong><span>Learn by ear.</span></div>
       <div class="footer-links"><a href="privacy/">Privacy policy</a><a href="mailto:support@tryslow.io">Support</a><a href="https://searle.dev/">By Tim Searle</a></div>
-      <p>© 2026 Tim Searle</p>
+      <p>© 2026 Tim Searle{% if page.app_store_id %}<br>Apple, the Apple logo, App Store, iPhone, iPad and Mac are trademarks of Apple Inc., registered in the U.S. and other countries.{% endif %}</p>
     </footer>
   </body>
 </html>
