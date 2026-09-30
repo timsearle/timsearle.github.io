@@ -10,7 +10,9 @@ I'm Tim, a software engineer based in London. I've been building software profes
 
 **Security Engineer** at Meta - working on Identity & Access Management at scale, building authorization solutions for workforce and workload identities.
 
-**[Altilium](https://altilium.app)** — an iOS app in SwiftUI that helps cardiac physiologists optimise pacemaker battery outputs.
+**[Slow](https://tryslow.io)** — helps musicians learn music by ear, with tools to slow down recordings and practise one phrase at a time.
+
+**[Altilium](https://altilium.app)** — helps cardiac physiologists compare pacemaker energy outputs to optimise battery longevity.
 
 ## Other projects
 
